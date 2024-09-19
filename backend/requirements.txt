@@ -1,0 +1,12 @@
+Flask
+flask_cors
+Werkzeug
+pytesseract
+opencv-python
+numpy
+Pillow
+easyocr
+scikit-image
+pypdfium2
+groq
+

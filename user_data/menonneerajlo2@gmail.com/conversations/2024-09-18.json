@@ -1,0 +1,10 @@
+[
+    {
+        "content": "what is the haemoglobin value?",
+        "role": "user"
+    },
+    {
+        "role": "bot",
+        "content": "The haemoglobin value is 83 g/L."
+    }
+]
