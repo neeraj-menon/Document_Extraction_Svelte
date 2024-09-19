@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from 'svelte';
+
   let pdfFile = null;
   let promptFile = null;
   let pdfFilename = '';
@@ -14,6 +16,7 @@
 
   // Chatbot state
   let chatData = []; // Holds the current chat session
+  let chat_Data = []; // Holds the current chat session
   let chatHistory = []; // Holds the list of previous chats
   let selectedChat = null; // The chat currently selected from history
   let fetchChatHistoryError = null; // Error handling for chat history
@@ -145,7 +148,7 @@
       userInput = ''; // Clear input box
 
       // Save the updated chat to the backend
-      await saveChat();
+      // await saveChat();
 
       try {
           const response = await fetch('http://localhost:5000/chat', {
@@ -160,33 +163,33 @@
 
           // Add chatbot response to chatData
           chatData = [...chatData, { role: 'bot', content: chatResponse }];
-          await saveChat();
+          // await saveChat();
       } catch (error) {
           console.error('Error getting chatbot response:', error);
       }
   };
 
   // Function to save the chat to the backend
-  const saveChat = async () => {
-      try {
-          const response = await fetch('http://localhost:5000/save_chat', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                  session_id: selectedChat ? selectedChat.session_id : `conversation_${new Date().toISOString()}`,
-                  chat: chatData
-              }),
-          });
+  // const saveChat = async () => {
+  //     try {
+  //         const response = await fetch('http://localhost:5000/save_chat', {
+  //             method: 'POST',
+  //             headers: { 'Content-Type': 'application/json' },
+  //             body: JSON.stringify({
+  //                 session_id: selectedChat ? selectedChat.session_id : `conversation_${new Date().toISOString()}`,
+  //                 chat: chatData
+  //             }),
+  //         });
 
-          if (!response.ok) {
-              throw new Error('Failed to save chat');
-          }
+  //         if (!response.ok) {
+  //             throw new Error('Failed to save chat');
+  //         }
 
-          console.log('Chat saved successfully');
-      } catch (error) {
-          console.error('Error saving chat:', error);
-      }
-  };
+  //         console.log('Chat saved successfully');
+  //     } catch (error) {
+  //         console.error('Error saving chat:', error);
+  //     }
+  // };
 
   // Function to start a new chat
   const startNewChat = async () => {
@@ -216,6 +219,7 @@
               throw new Error('Network response was not ok');
           }
           const data = await response.json();
+          // console.log("Data: ",data);
           resultsHistory = data;
       } catch (error) {
           fetchResultsHistoryError = error.message || 'Failed to fetch results history';
@@ -231,6 +235,7 @@
               throw new Error('Network response was not ok');
           }
           const data = await response.json();
+          console.log("Data: ",data);
           chatHistory = Array.isArray(data) ? data : []; // Ensure chatHistory is always an array
       } catch (error) {
           fetchChatHistoryError = error.message || 'Failed to fetch chat history';
@@ -241,17 +246,30 @@
   const loadChat = async (chat) => {
       selectedChat = chat;
       try {
-          const response = await fetch(`http://localhost:5000/load_chat?session_id=${chat.session_id}`);
+          const response = await fetch(`http://localhost:5000/load_chat?chat_id=${chat.chat_id}`);
           if (!response.ok) {
               throw new Error('Failed to load chat');
           }
 
-          chatData = await response.json(); // Load chat into chatbox
-          console.log('Loaded chat:', chatData);
+          const chatData = await response.json(); // Load chat data
+          console.log('Loaded chat:', chatData.prompts);
+          chat_Data = chatData.prompts
+
+          // Assuming you want to update the chat display with the loaded data
+          // For example, update a chatbox with chatData
+          // updateChatBox(chatData);
       } catch (error) {
           console.error('Error loading chat:', error);
-          chatData = []; // Reset chat data on error
+          // Reset chat data or handle the error as needed
+          chatData = [];
       }
+  };
+
+  // Example function to update chatbox (customize as needed)
+  const updateChatBox = (chatData) => {
+      // Implementation to display chatData in the UI
+      // For example, set chat data in a chatbox component
+      console.log('Updating chatbox with:', chatData);
   };
 
   // Toggle the side panel
@@ -260,8 +278,13 @@
   };
 
   // Fetch results history and chat history when the component is initialized
-  fetchResultsHistory();
-  fetchChatHistory();
+  // fetchResultsHistory();
+  // fetchChatHistory();
+
+  onMount(() => {
+    fetchResultsHistory();
+      fetchChatHistory();
+  });
 
   const handleLogout = () => {
       window.location.href = 'http://localhost:5000/logout'; // Redirect to the Flask logout endpoint
@@ -334,6 +357,18 @@
                           <strong>{message.role}:</strong> {message.content}
                       </div>
                   {/each}
+                  {#if chat_Data && chat_Data.length > 0}
+                    {#each chat_Data as { prompt, response }, index}
+                        <div class="chat-message user" key={index}>
+                            <strong>User:</strong> {prompt}
+                        </div>
+                        <div class="chat-message bot" key={index}>
+                            <strong>Response:</strong> {response}
+                        </div>
+                    {/each}
+                {:else}
+                    <p>No messages to display.</p>
+                {/if}
               </div>
 
               <!-- Input for user to type and send messages -->
@@ -402,7 +437,7 @@
                           on:keydown={(e) => e.key === 'Enter' && loadChat(chat)}
                           tabindex="0"
                       >
-                          <p>{chat.date}</p>
+                          <p>{chat.chat_id}</p>
                       </button>
                   {/each}
               {:else}

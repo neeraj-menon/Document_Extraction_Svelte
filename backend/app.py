@@ -521,9 +521,42 @@ def chat_history():
             }
             for chat_id in user_data[email].keys()
         ]
-        print(chats)
+        print(jsonify(chats))
 
-        return jsonify(chats), 200
+        return chats, 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
+@app.route('/load_chat', methods=['GET'])
+def load_chat():
+    # Get the session ID from the query parameters
+    chat_id = request.args.get('chat_id')
+    print(chat_id)
+    email = email_id_forjson
+    user_data_file = app.config['USER_DATA_FILE']
+
+    if not chat_id:
+        return jsonify({'error': 'No chat ID provided'}), 400
+
+    try:
+        with open(user_data_file, 'r', encoding='utf-8') as file:
+            user_data = json.load(file)
+
+        if email not in user_data or chat_id not in user_data[email]:
+            return jsonify({'error': 'Chat not found'}), 404
+
+        chat_data = user_data[email][chat_id]
+        
+        
+        # return chat_data
+
+        return {
+            'chat_id': chat_id,
+            'prompts': chat_data.get('prompts', []),
+            'extracted_data': chat_data.get('extracted_data', '')
+        }, 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
