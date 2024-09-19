@@ -359,8 +359,53 @@ def process_pdf():
     # update_user_data(email, chat_id, system_prompt, json_data, extracted_text)
     update_user_data(email, chat_id, "", "", extracted_text)
     
+    # Check if the folder exists
+    folder_path = './DocEx_frontend/backend/extracted_images'
+    if os.path.exists(folder_path):
+        # Remove the folder and its contents
+        shutil.rmtree(folder_path)
+        print(f"The folder '{folder_path}' has been deleted.")
+    else:
+        print(f"The folder '{folder_path}' does not exist.")
+    
     progress = 100  # Processing complete
-    return jsonify(extracted_text), 200
+    return extracted_text, 200
+
+
+@app.route('/download_results', methods=['GET'])
+def download_results():
+    pdf_filename = request.args.get('pdf_filename')
+    
+    if not pdf_filename:
+        return jsonify({'error': 'No PDF filename provided'}), 400
+    
+    # Generate next sequential chat_id
+    user_data_file = app.config['USER_DATA_FILE']
+    with open(user_data_file, 'r', encoding='utf-8') as file:
+        user_data = json.load(file)
+    
+    # Retrieve the results for the specified PDF
+    # user_data = load_user_data()
+    # email = session['profile']['email']
+    # email = session.get('profile', {}).get('email')
+    email = email_id_forjson
+    existing_chats = user_data[email].keys()
+    next_chat_number = len(existing_chats)
+    chat_id = f"chat_{next_chat_number}"
+    
+    if email not in user_data:
+        return jsonify({'error': 'User data not found'}), 404
+    
+    results = {}
+    # for chat_id, chat_data in user_data[email].items():
+    #     if 'result' in chat_data:
+    #         results[chat_id] = chat_data['result']
+    results = user_data[email][chat_id]["extracted_data"]
+    
+    # Create a JSON response for download
+    result_data = json.dumps(results, ensure_ascii=False, indent=4)
+    result_json = json.loads(result_data)
+    return Response(result_json, mimetype='application/json', headers={'Content-Disposition': 'attachment; filename=results.json'})
 
 
 
@@ -559,8 +604,36 @@ def load_chat():
         }, 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+    
+    
+# New route to start a new chat
+@app.route('/new_chat', methods=['POST'])
+def new_chat():
+    # Determine next chat_id if not provided
+    user_data_file = app.config['USER_DATA_FILE']
+    with open(user_data_file, 'r', encoding='utf-8') as file:
+        user_data = json.load(file)
 
-
+    
+    email = email_id_forjson
+    existing_chats = user_data[email].keys()
+    prev_chat_number = len(existing_chats) 
+    next_chat_number = len(existing_chats) + 1
+    print(next_chat_number)
+    prev_chat_id = f"chat_{prev_chat_number}" 
+    next_chat_id = f"chat_{next_chat_number}" 
+    # print(chat_id)
+    
+    # if chat_id not in user_data[email]:
+    #     user_data[email][chat_id] = {
+    #         "prompts": [],
+    #         "extracted_data": {}
+    #     }
+    
+    update_user_data(email, next_chat_id, "", "", user_data[email][prev_chat_id]["extracted_data"])
+    
+    return jsonify({'message': 'New chat started'}), 200
 
 
 if __name__ == '__main__':

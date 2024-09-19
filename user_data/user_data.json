@@ -183,9 +183,105 @@
                 {
                     "prompt": "hello",
                     "response": "Hello! I'm here to help you with any questions you might have about blood test results. If you'd like to ask about a specific test result or get help with something related to blood work, just let me know and I'll do my best to assist you!"
+                },
+                {
+                    "prompt": "hi",
+                    "response": "Hello! What questions do you have about the test results?"
+                },
+                {
+                    "prompt": "hi",
+                    "response": "Hi there! I'm happy to help you with any questions you might have about your test results. Please go ahead and ask me any questions you have about the results, or if you'd like me to summarize or interpret any specific values or ranges for you."
                 }
             ],
             "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/dL\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"g/dL\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"150.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
+        },
+        "chat_16": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "hi",
+                    "response": "Hi! I'm here to help answer any questions you may have about those test results. Which specific test result or test result category would you like me to help you with?"
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/dL\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"g/dL\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"150.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
+        },
+        "chat_17": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "hello",
+                    "response": "Hello! I'm here to help with any questions you may have regarding the test results. Please go ahead and ask your question, and I'll do my best to provide you with a helpful response."
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/dL\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"g/dL\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"150.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
+        },
+        "chat_18": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "hi",
+                    "response": "Hello! How can I assist you today? You're looking at a set of test results for some bio-markers, I believe. Is there something in particular you'd like to know or ask about the results? I'm here to help!"
+                },
+                {
+                    "prompt": "what is the haemoglobin level?",
+                    "response": "The haemoglobin level is 83 g/dL."
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/dL\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"g/dL\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"150.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
+        },
+        "chat_19": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/L\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"Derived\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"g/L\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"250.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
+        },
+        "chat_20": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/L\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"g/L\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"150.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
+        },
+        "chat_21": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/L\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"Derived\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"g/L\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"250.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
+        },
+        "chat_22": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/L\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"%\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"250.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
+        },
+        "chat_23": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/L\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"Derived\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"%\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"250.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
         }
     }
 }

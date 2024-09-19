@@ -17,6 +17,7 @@
   // Chatbot state
   let chatData = []; // Holds the current chat session
   let chat_Data = []; // Holds the current chat session
+  let chatContainer = []; // Holds the current chat session
   let chatHistory = []; // Holds the list of previous chats
   let selectedChat = null; // The chat currently selected from history
   let fetchChatHistoryError = null; // Error handling for chat history
@@ -192,24 +193,54 @@
   // };
 
   // Function to start a new chat
-  const startNewChat = async () => {
-      try {
-          const response = await fetch('http://localhost:5000/new_chat', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ session_id: Date.now() }), // Generate a unique session ID
-          });
-          if (response.status !== 200) {
-              throw new Error('Error starting new chat');
-          }
-          // Clear the messages array to start a fresh conversation
-          chatData = [];
-      } catch (error) {
-          errorMessage = error.message || 'Failed to start a new chat';
-      }
-  };
+  // const startNewChat = async () => {
+  //     try {
+  //         const response = await fetch('http://localhost:5000/new_chat', {
+  //             method: 'POST',
+  //             headers: {
+  //                 'Content-Type': 'application/json',
+  //             },
+  //             body: JSON.stringify({ session_id: Date.now() }), // Generate a unique session ID
+  //         });
+  //         if (response.status !== 200) {
+  //             throw new Error('Error starting new chat');
+  //         }
+  //         // Clear the messages array to start a fresh conversation
+  //         chatData = [];
+  //     } catch (error) {
+  //         errorMessage = error.message || 'Failed to start a new chat';
+  //     }
+  // };
+
+
+  async function startNewChat() {
+        try {
+            // Send POST request to the new chat route
+            const response = await fetch('http://localhost:5000/new_chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
+            
+            if (response.ok) {
+                const result = await response.json();
+                console.log(result.message);
+
+                // Clear all chat containers
+                chatData = [];
+                chat_Data = [];
+                chatContainer = [];
+
+                // Optionally clear user input
+                userInput = '';
+            } else {
+                console.error('Failed to start a new chat');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
   // Function to fetch the results history
   const fetchResultsHistory = async () => {
@@ -368,6 +399,15 @@
                     {/each}
                 {:else}
                     <p>No messages to display.</p>
+                {/if}
+                {#if chatContainer.length === 0}
+                    <p>No chats yet. Start a conversation!</p>
+                {:else}
+                  {#each chatContainer as chatMessage}
+                      <div class="chat-message">
+                          {chatMessage}
+                      </div>
+                  {/each}
                 {/if}
               </div>
 
