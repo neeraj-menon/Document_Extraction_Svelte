@@ -633,6 +633,18 @@ def new_chat():
     
     update_user_data(email, next_chat_id, "", "", user_data[email][prev_chat_id]["extracted_data"])
     
+    with open(user_data_file, 'r', encoding='utf-8') as file:
+        user_data = json.load(file)
+    
+    chat_data = user_data[email][next_chat_id]
+    print(chat_data)
+    
+    return {
+            'chat_id': next_chat_id,
+            'prompts': chat_data.get('prompts', []),
+            'extracted_data': chat_data.get('extracted_data', '')
+        }, 200
+    
     return jsonify({'message': 'New chat started'}), 200
 
 

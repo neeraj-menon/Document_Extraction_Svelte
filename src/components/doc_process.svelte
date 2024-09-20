@@ -170,77 +170,81 @@
       }
   };
 
-  // Function to save the chat to the backend
-  // const saveChat = async () => {
-  //     try {
-  //         const response = await fetch('http://localhost:5000/save_chat', {
-  //             method: 'POST',
-  //             headers: { 'Content-Type': 'application/json' },
-  //             body: JSON.stringify({
-  //                 session_id: selectedChat ? selectedChat.session_id : `conversation_${new Date().toISOString()}`,
-  //                 chat: chatData
-  //             }),
-  //         });
 
-  //         if (!response.ok) {
-  //             throw new Error('Failed to save chat');
-  //         }
-
-  //         console.log('Chat saved successfully');
-  //     } catch (error) {
-  //         console.error('Error saving chat:', error);
-  //     }
-  // };
-
-  // Function to start a new chat
-  // const startNewChat = async () => {
-  //     try {
-  //         const response = await fetch('http://localhost:5000/new_chat', {
-  //             method: 'POST',
-  //             headers: {
-  //                 'Content-Type': 'application/json',
-  //             },
-  //             body: JSON.stringify({ session_id: Date.now() }), // Generate a unique session ID
-  //         });
-  //         if (response.status !== 200) {
-  //             throw new Error('Error starting new chat');
-  //         }
-  //         // Clear the messages array to start a fresh conversation
-  //         chatData = [];
-  //     } catch (error) {
-  //         errorMessage = error.message || 'Failed to start a new chat';
-  //     }
-  // };
-
-
-  async function startNewChat() {
-        try {
-            // Send POST request to the new chat route
-            const response = await fetch('http://localhost:5000/new_chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            });
+//   async function startNewChat() {
+//         try {
+//             // Send POST request to the new chat route
+//             const response = await fetch('http://localhost:5000/new_chat', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//             });
             
-            if (response.ok) {
-                const result = await response.json();
-                console.log(result.message);
+//             if (response.ok) {
+//                 const result = await response.json();
+//                 // console.log(result.message);
 
-                // Clear all chat containers
-                chatData = [];
-                chat_Data = [];
-                chatContainer = [];
+//                 // Clear all chat containers
+//                 console.log("Loaded extracted data:", result.extracted_data)
+//                 jsonResponse = JSON.stringify(chatData.extracted_data, null, 4);
+//                 chatData = [];
+//                 chat_Data = [];
+//                 chatContainer = [];
 
-                // Optionally clear user input
-                userInput = '';
-            } else {
-                console.error('Failed to start a new chat');
-            }
-        } catch (error) {
-            console.error('Error:', error);
+//                 // Optionally clear user input
+//                 userInput = '';
+//             } else {
+//                 console.error('Failed to start a new chat');
+//             }
+//         } catch (error) {
+//             console.error('Error:', error);
+//         }
+//     }
+
+
+
+
+async function startNewChat() {
+    try {
+        // Send POST request to the new chat route
+        const response = await fetch('http://localhost:5000/new_chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+
+            // Clear all chat containers
+            chatData = [];
+            chat_Data = [];
+            chatContainer = [];
+
+            // Set jsonResponse to display the extracted data
+            jsonResponse = result.extracted_data;
+
+            // Optionally clear user input
+            userInput = '';
+        } else {
+            console.error('Failed to start a new chat');
         }
+    } catch (error) {
+        console.error('Error:', error);
     }
+}
+
+
+
+
+
+
+
+
+
+
 
   // Function to fetch the results history
   const fetchResultsHistory = async () => {
@@ -285,22 +289,13 @@
           const chatData = await response.json(); // Load chat data
           console.log('Loaded chat:', chatData.prompts);
           chat_Data = chatData.prompts
+          jsonResponse = chatData.extracted_data;
 
-          // Assuming you want to update the chat display with the loaded data
-          // For example, update a chatbox with chatData
-          // updateChatBox(chatData);
       } catch (error) {
           console.error('Error loading chat:', error);
           // Reset chat data or handle the error as needed
           chatData = [];
       }
-  };
-
-  // Example function to update chatbox (customize as needed)
-  const updateChatBox = (chatData) => {
-      // Implementation to display chatData in the UI
-      // For example, set chat data in a chatbox component
-      console.log('Updating chatbox with:', chatData);
   };
 
   // Toggle the side panel
@@ -309,9 +304,6 @@
   };
 
   // Fetch results history and chat history when the component is initialized
-  // fetchResultsHistory();
-  // fetchChatHistory();
-
   onMount(() => {
     fetchResultsHistory();
       fetchChatHistory();
@@ -459,30 +451,6 @@
       {/if}
 
 
-      <!-- Results History -->
-      <!-- <div class="results-history mt-6">
-          <h2 class="text-xl font-bold mb-2">Results History</h2>
-          {#if fetchResultsHistoryError}
-              <div class="text-red-500">{fetchResultsHistoryError}</div>
-          {:else if resultsHistory.length > 0}
-              <ul>
-                  {#each resultsHistory as result}
-                      <li class="mb-2">
-                          <a href={result.downloadUrl} class="text-blue-500 hover:underline">{result.filename}</a>
-                          <span class="ml-2 text-gray-500">({result.date})</span>
-                      </li>
-                  {/each}
-              </ul>
-          {:else}
-              <p>No results history available.</p>
-          {/if}
-      </div> -->
-
-      <!-- Side Panel Button -->
-      <!-- <button on:click={togglePanel} class="bg-gray-500 text-white py-2 px-4 rounded mt-4">
-          {isPanelOpen ? 'Close Chat History' : 'Open Chat History'}
-      </button> -->
-
       <!-- Side Panel -->
       {#if isPanelOpen}
           <div class="side-panel">
@@ -510,11 +478,7 @@
 </div>
 
 <style lang='postcss'> 
-  /* .navbar {
-      background-color: #333;
-      color: white;
-      padding: 10px;
-  } */
+  
   .navbar {
   /* position: fixed; */
   top: 0;
@@ -565,19 +529,21 @@
   }
 
   .progress-bar {
-      width: 100%;
-      background-color: #f3f3f3;
-      border-radius: 8px;
-      overflow: hidden;
-      margin: 10px 0;
-  }
+    width: 100%;
+    height: 8px; /* Thinner height */
+    background-color: #e0e0e0; /* Subtle, modern background color */
+    border-radius: 50px; /* More rounded for a sleek look */
+    overflow: hidden;
+    margin: 12px 0; /* Slightly more spacing for a cleaner feel */
+}
 
-  .progress {
-      height: 24px;
-      background-color: #4caf50;
-      width: 0;
-      transition: width 0.4s ease;
-  }
+.progress {
+    height: 100%;
+    background-color: #00c853; /* Sleek modern green color */
+    width: 0;
+    transition: width 0.3s ease-in-out; /* Smooth, quick transition */
+    border-radius: 50px; /* Rounded edges for modern effect */
+}
 
   .chat-container {
       display: flex;
@@ -590,20 +556,47 @@
   }
 
   .chat-messages {
+    display: flex;
+    flex-direction: column;
       height: 300px;
       overflow-y: auto;
       background-color: #f9f9f9;
       padding: 10px;
       margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
+
+  /* .chat-message.user {
+      text-align: right;
+  } */
+
 
   .chat-message.user {
-      text-align: right;
-  }
+    text-align: right;
+    max-width: 75%; /* Limit the width for readability */
+    margin: 8px 0;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #007bff; /* Clean blue color */
+    color: white; /* White text for contrast */
+    align-self: flex-end; /* Aligns user messages to the right */
+    border-bottom-right-radius: 0; /* Flat edge on the right side */
+}
+
+  /* .chat-message.bot {
+      text-align: left;
+  } */
 
   .chat-message.bot {
-      text-align: left;
-  }
+    max-width: 75%; /* Limit the width for readability */
+    margin: 8px 0;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #28a745; /* Modern green color */
+    color: white; /* White text for contrast */
+    align-self: flex-start; /* Aligns bot messages to the left */
+    border-bottom-left-radius: 0; /* Flat edge on the left side */
+}
 
   .chat-input {
       display: flex;
@@ -674,57 +667,6 @@
   .json-container::-webkit-scrollbar-thumb:hover {
     background-color: #555;
   }
-
-
-
-  /* .results-history {
-      margin-top: 16px;
-  }
-
-  .results-history a {
-      color: #007bff;
-      text-decoration: none;
-  }
-
-  .results-history a:hover {
-      text-decoration: underline;
-  } */
-
-  /* .side-panel {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 300px;
-      height: 100%;
-      background: #f8f9fa;
-      border-left: 1px solid #ddd;
-      padding: 10px;
-      overflow-y: auto;
-      z-index: 1000;
-  } */
-
-    /* .side-panel {
-    position: fixed;
-    top: 60px; 
-    left: 0;
-    width: 300px;
-    height: calc(100% - 60px); 
-    background-color: #f8f9fa;
-    border-right: 1px solid #ddd;
-    z-index: 999; 
-    overflow-y: auto;
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .chat-item {
-      cursor: pointer;
-      padding: 5px;
-      border-bottom: 1px solid #ddd;
-  }
-
-  .chat-item:hover {
-      background-color: #eee;
-  } */
 
   /* Sidebar styles */
 .side-panel {
