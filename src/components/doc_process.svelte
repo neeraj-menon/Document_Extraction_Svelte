@@ -404,7 +404,7 @@
                     <p>No messages to display.</p>
                 {/if}
                 {#if chatContainer.length === 0}
-                    <p>No chats yet. Start a conversation!</p>
+                    <!-- <p>No chats yet. Start a conversation!</p> -->
                 {:else}
                   {#each chatContainer as chatMessage}
                       <div class="chat-message">
@@ -422,7 +422,7 @@
                       bind:value={userInput}
                   />
                   <button on:click={sendMessage} class="send-msg-btn">Send</button>
-                  <button on:click={startNewChat} class="new-chat-btn">Start New Chat</button>
+                  <!-- <button on:click={startNewChat} class="new-chat-btn">Start New Chat</button> -->
               </div>
           </div>
       </div>
@@ -490,6 +490,7 @@
               {#if fetchChatHistoryError}
                   <div class="text-red-500">{fetchChatHistoryError}</div>
               {:else if chatHistory.length > 0}
+                <button on:click={startNewChat} class="new-chat-btn">Start New Chat</button>
                   {#each chatHistory as chat}
                       <button
                           class="chat-item"
@@ -630,7 +631,10 @@
       font-size: 1em;
       cursor: pointer;
       border-radius: 5px;
-      margin-right: 20px;
+      align-items: center;
+      margin-left: 70px;
+      margin-top: 10px;
+
   }
 
   .new-chat-btn {
@@ -643,11 +647,13 @@
       font-size: 0.95em;
       cursor: pointer;
       border-radius: 5px;
+      margin-top: 20px;
+      margin-bottom: 20px;
   }
 
   /* Container for scrollable JSON response */
   .json-container {
-    max-height: 300px; /* Adjust height as needed */
+    max-height: 730px; /* Adjust height as needed */
     overflow-y: auto;  /* Enable vertical scrolling */
     background-color: #ffffff; /* Optional: white background for readability */
     padding: 10px;
