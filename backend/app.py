@@ -427,11 +427,28 @@ def chat():
     if email not in user_data:
         user_data[email] = {}
 
-    # Determine next chat_id if not provided
-    existing_chats = user_data[email].keys()
-    next_chat_number = len(existing_chats)
-    chat_id = f"chat_{next_chat_number}"
+    # # Determine next chat_id if not provided
+    # existing_chats = user_data[email].keys()
+    # next_chat_number = len(existing_chats)
+    # chat_id = f"chat_{next_chat_number}"
+    # print(chat_id)
+    
+    # # Use the active chat ID from the session
+    # chat_id = session.get('active_chat_id')
+    
+    # if not chat_id:
+    #     return jsonify({'error': 'No active chat loaded'}), 400
+    
+    # Use session['active_chat_id'] or default to the next chat if not set
+    # chat_id = session.get('active_chat_id')
+    chat_id = active_chat
     print(chat_id)
+    if not chat_id:
+        # Determine next chat_id
+        existing_chats = user_data[email].keys()
+        next_chat_number = len(existing_chats)
+        chat_id = f"chat_{next_chat_number}"
+        session['active_chat_id'] = chat_id  # Set it in session
 
     if chat_id not in user_data[email]:
         user_data[email][chat_id] = {
@@ -576,6 +593,7 @@ def chat_history():
 
 @app.route('/load_chat', methods=['GET'])
 def load_chat():
+    global active_chat
     # Get the session ID from the query parameters
     chat_id = request.args.get('chat_id')
     print(chat_id)
@@ -593,6 +611,10 @@ def load_chat():
             return jsonify({'error': 'Chat not found'}), 404
 
         chat_data = user_data[email][chat_id]
+        
+        session['active_chat_id'] = chat_id
+        active_chat = session['active_chat_id']
+        print(active_chat)
         
         
         # return chat_data
