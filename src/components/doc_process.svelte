@@ -378,12 +378,7 @@ async function startNewChat() {
           <h2 class="text-xl font-bold mb-2">Chatbot</h2>
           <div class="chat-container">
               <div class="chat-messages">
-                  {#each chatData as message}
-                      <div class="chat-message {message.role}">
-                          <strong>{message.role}:</strong> {message.content}
-                      </div>
-                  {/each}
-                  {#if chat_Data && chat_Data.length > 0}
+                {#if chat_Data && chat_Data.length > 0}
                     {#each chat_Data as { prompt, response }, index}
                         <div class="chat-message user" key={index}>
                             <strong>User:</strong> {prompt}
@@ -395,6 +390,23 @@ async function startNewChat() {
                 {:else}
                     <p>No messages to display.</p>
                 {/if}
+                  {#each chatData as message}
+                      <div class="chat-message {message.role}">
+                          <strong>{message.role}:</strong> {message.content}
+                      </div>
+                  {/each}
+                  <!-- {#if chat_Data && chat_Data.length > 0}
+                    {#each chat_Data as { prompt, response }, index}
+                        <div class="chat-message user" key={index}>
+                            <strong>User:</strong> {prompt}
+                        </div>
+                        <div class="chat-message bot" key={index}>
+                            <strong>Response:</strong> {response}
+                        </div>
+                    {/each}
+                {:else}
+                    <p>No messages to display.</p>
+                {/if} -->
                 {#if chatContainer.length === 0}
                     <!-- <p>No chats yet. Start a conversation!</p> -->
                 {:else}

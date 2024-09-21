@@ -76,6 +76,7 @@ def login():
 @app.route('/callback')
 def callback():
     global email_id_forjson
+    global active_chat
     auth0.authorize_access_token()
     resp = auth0.get('userinfo')
     user_info = resp.json()
@@ -87,6 +88,19 @@ def callback():
     email_id_forjson = user_info['email']
     # After login, initialize the user data JSON
     setup_user_data_file()
+    
+    
+    # Generate next sequential chat_id
+    user_data_file = app.config['USER_DATA_FILE']
+    with open(user_data_file, 'r', encoding='utf-8') as file:
+        user_data = json.load(file)
+    
+    # Determine next chat_id
+    existing_chats = user_data[email_id_forjson].keys()
+    next_chat_number = len(existing_chats)
+    active_chat = f"chat_{next_chat_number}"
+
+    
     return redirect('http://localhost:5173/doc_process')
 
 @app.route('/dashboard')
