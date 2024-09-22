@@ -114,7 +114,7 @@
       if (file) {
           promptFile = file;
           promptFilename = file.name;
-          promptThumbnail = pdfThumbnail;
+          promptThumbnail = promptThumbnail;
       }
   };
 

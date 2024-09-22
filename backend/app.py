@@ -360,6 +360,7 @@ def progress_stream():
 @app.route('/process_pdf', methods=['POST'])
 def process_pdf():
     global progress
+    global active_chat
     pdf_file = request.json.get('pdf_file')
     prompt_file = request.json.get('prompt_file')
 
@@ -391,6 +392,9 @@ def process_pdf():
     existing_chats = user_data[email].keys()
     next_chat_number = len(existing_chats)
     chat_id = f"chat_{next_chat_number}"
+    
+    session['active_chat_id'] = chat_id
+    active_chat = session['active_chat_id']
     
     active_chat = chat_id
 

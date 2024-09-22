@@ -360,6 +360,63 @@
                 }
             ],
             "extracted_data": {}
+        },
+        "chat_1": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "9",
+                    "response": "It seems like you entered a random number! If you'd like, I can assist you by answering questions related to the provided test results. Which specific aspect of the test results would you like to know more about? Do you have a specific bio-marker in mind, or would you like me to provide an overall summary or help you identify any potential concerns?"
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/dL\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"%\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"150.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
+        },
+        "chat_2": {
+            "prompts": [
+                {
+                    "prompt": "1",
+                    "response": "I'm not sure what you are referring to. There is no data provided. Can you please provide some data or ask a question, and I'll do my best to help?"
+                }
+            ],
+            "extracted_data": {}
+        },
+        "chat_3": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "1",
+                    "response": "You're asking about the first test result, which is HAEMOGLOBIN (HB%).\n\nAccording to the data, the result is 83 g/L, and the normal reference range is 120-150 g/L."
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/L\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"(Derived)\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"g/L\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"250.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
+        },
+        "chat_4": {
+            "prompts": [
+                {
+                    "prompt": "4",
+                    "response": "It seems like you've provided some numbers! However, without any specific context or input, I'm not sure what you would like me to assist you with. Could you please provide some more information or clarify your question?"
+                }
+            ],
+            "extracted_data": {}
+        },
+        "chat_5": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "hi",
+                    "response": "Hi! How can I help you today? Would you like me to assist you in answering a question or provide information about test results? Just let me know!"
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/L\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"g/L\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"150.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}"
         }
     }
 }
