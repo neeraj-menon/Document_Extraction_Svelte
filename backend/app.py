@@ -391,6 +391,8 @@ def process_pdf():
     existing_chats = user_data[email].keys()
     next_chat_number = len(existing_chats) + 1
     chat_id = f"chat_{next_chat_number}"
+    
+    active_chat = chat_id
 
     # Update user data
     # update_user_data(email, chat_id, system_prompt, json_data, extracted_text)

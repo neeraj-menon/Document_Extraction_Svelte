@@ -78,45 +78,45 @@
         }
     }
 
-    // Handle file upload for PDF from the input element
-    function handlePDFUpload(event) {
-        const file = event.target.files[0];
-        pdfFilename = file.name;
-        pdfThumbnail = URL.createObjectURL(file); // Generate a URL for the PDF file
-    }
+    // // Handle file upload for PDF from the input element
+    // function handlePDFUpload(event) {
+    //     const file = event.target.files[0];
+    //     pdfFilename = file.name;
+    //     pdfThumbnail = URL.createObjectURL(file); // Generate a URL for the PDF file
+    // }
 
-    // Handle file upload for Prompt from the input element
-    function handlePromptUpload(event) {
-        const file = event.target.files[0];
-        promptFilename = file.name;
-        // Handle any further processing for the .txt file
-    }
-
-
+    // // Handle file upload for Prompt from the input element
+    // function handlePromptUpload(event) {
+    //     const file = event.target.files[0];
+    //     promptFilename = file.name;
+    //     // Handle any further processing for the .txt file
+    // }
 
 
 
 
 
-//   // Function to handle PDF file upload and store its name
-//   const handlePDFUpload = (event) => {
-//       const file = event.target.files[0];
-//       if (file) {
-//           pdfFile = file;
-//           pdfFilename = file.name;
-//           pdfThumbnail = URL.createObjectURL(file);
-//       }
-//   };
 
-//   // Function to handle prompt file upload and store its name
-//   const handlePromptUpload = (event) => {
-//       const file = event.target.files[0];
-//       if (file) {
-//           promptFile = file;
-//           promptFilename = file.name;
-//           promptThumbnail = URL.createObjectURL(file);
-//       }
-//   };
+
+  // Function to handle PDF file upload and store its name
+  const handlePDFUpload = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+          pdfFile = file;
+          pdfFilename = file.name;
+          pdfThumbnail = URL.createObjectURL(file);
+      }
+  };
+
+  // Function to handle prompt file upload and store its name
+  const handlePromptUpload = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+          promptFile = file;
+          promptFilename = file.name;
+          promptThumbnail = URL.createObjectURL(file);
+      }
+  };
 
   const getProgress = () => {
       const eventSource = new EventSource('http://localhost:5000/progress');
