@@ -89,16 +89,18 @@ def callback():
     # After login, initialize the user data JSON
     setup_user_data_file()
     
-    
     # Generate next sequential chat_id
     user_data_file = app.config['USER_DATA_FILE']
     with open(user_data_file, 'r', encoding='utf-8') as file:
         user_data = json.load(file)
     
-    # Determine next chat_id
-    existing_chats = user_data[email_id_forjson].keys()
-    next_chat_number = len(existing_chats)
-    active_chat = f"chat_{next_chat_number}"
+    if email_id_forjson in user_data.keys():
+    
+        # Determine next chat_id
+        existing_chats = user_data[email_id_forjson].keys()
+        next_chat_number = len(existing_chats)
+        active_chat = f"chat_{next_chat_number}"
+        print(active_chat)
 
     
     return redirect('http://localhost:5173/doc_process')
@@ -116,13 +118,27 @@ def logout():
 
 def setup_user_data_file():
     """Setup a JSON file for the current user based on their email."""
-    email = session.get('profile', {}).get('email')
+    # email = session.get('profile', {}).get('email')
+    email = email_id_forjson
+    print(email)
     if not email:
         return
+
     
     # Define the path to the user data file
     user_data_file = os.path.join('DocEx_frontend', 'user_data', 'user_data.json')
     app.config['USER_DATA_FILE'] = user_data_file
+    
+    user_data_file = app.config['USER_DATA_FILE']
+    with open(user_data_file, 'r', encoding='utf-8') as file:
+        user_data = json.load(file)
+                              
+    if email not in user_data.keys():
+        user_data[email] = {}
+        with open(user_data_file, 'w', encoding='utf-8') as file:
+            json.dump(user_data, file, ensure_ascii=False, indent=4)
+        
+    print(user_data[email])
 
     # Ensure the user data file exists
     if not os.path.exists(user_data_file):
@@ -354,7 +370,8 @@ def process_pdf():
     json_data = json.dumps(extracted_text, ensure_ascii=False, indent=4)
     
     # Update the user data file
-    email = session.get('profile', {}).get('email')
+    # email = session.get('profile', {}).get('email')
+    email = email_id_forjson
     
     # Generate next sequential chat_id
     user_data_file = app.config['USER_DATA_FILE']
