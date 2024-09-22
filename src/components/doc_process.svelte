@@ -330,7 +330,7 @@ async function startNewChat() {
 
 <div class="flex justify-between p-4">
   <!-- Left Panel -->
-  <div class="w-1/2 pr-4">
+  <div class="left-panel {isPanelOpen ? 'shifted' : ''}">
       <h1 class="text-2xl font-bold mb-4">Document Processing</h1>
 
       <div class="mb-4">
@@ -395,18 +395,6 @@ async function startNewChat() {
                           <strong>{message.role}:</strong> {message.content}
                       </div>
                   {/each}
-                  <!-- {#if chat_Data && chat_Data.length > 0}
-                    {#each chat_Data as { prompt, response }, index}
-                        <div class="chat-message user" key={index}>
-                            <strong>User:</strong> {prompt}
-                        </div>
-                        <div class="chat-message bot" key={index}>
-                            <strong>Response:</strong> {response}
-                        </div>
-                    {/each}
-                {:else}
-                    <p>No messages to display.</p>
-                {/if} -->
                 {#if chatContainer.length === 0}
                     <!-- <p>No chats yet. Start a conversation!</p> -->
                 {:else}
@@ -433,7 +421,7 @@ async function startNewChat() {
   </div>
 
   <!-- Right Panel -->
-  <div class="w-1/2 pl-4">
+  <div class="right-panel {isPanelOpen ? 'shifted' : ''}">
       <!-- {#if jsonResponse}
           <div class="p-4 border border-gray-300 bg-gray-100">
               <h3 class="text-xl font-semibold mb-2">Processed Result:</h3>
@@ -461,11 +449,12 @@ async function startNewChat() {
           </a>
         </div>
       {/if}
+      </div>
 
 
       <!-- Side Panel -->
-      {#if isPanelOpen}
-          <div class="side-panel">
+      <!-- {#if isPanelOpen} -->
+          <div class="side-panel {isPanelOpen ? 'open' : ''}">
               <h3 class="text-lg font-bold">Previous Chats</h3>
               {#if fetchChatHistoryError}
                   <div class="text-red-500">{fetchChatHistoryError}</div>
@@ -485,8 +474,8 @@ async function startNewChat() {
                   <p>No chat history available.</p>
               {/if}
           </div>
-      {/if}
-  </div>
+      <!-- {/if} -->
+  <!-- </div> -->
 </div>
 
 <style lang='postcss'> 
@@ -500,6 +489,27 @@ async function startNewChat() {
   color: white;
   z-index: 1000;
 }
+
+
+.left-panel {
+  width: 50%;              /* Equivalent to 'w-1/2' (50% width) */
+  padding-right: 1rem;     /* Equivalent to 'pr-4' (padding-right 1rem or 16px) */
+  transition: margin-left 0.3s ease;
+  margin-left: 0;
+}
+
+.left-panel.shifted {
+  margin-left: 250px; /* Same width as the side panel */
+}
+
+.right-panel {
+  width: 50%;              /* Equivalent to 'w-1/2' (50% width) */
+  padding-left: 1rem;      /* Equivalent to 'pl-4' (padding-left 1rem or 16px) */
+  transition: margin-left 0.3s ease;
+  margin-left: 0;
+}
+
+
 
 
 .prev-chat-button {
@@ -681,16 +691,21 @@ async function startNewChat() {
   }
 
   /* Sidebar styles */
-.side-panel {
-  width: 200px; /* Adjust the width as needed */
-  background-color: #f0f0f0; /* Optional: light background for the sidebar */
-  padding: 10px;
-  position: absolute; /* Ensure it is positioned correctly */
-  top: 60px; /* Adjust this to be below the navbar */
+  .side-panel {
+  position: fixed;
+  top: 60px;
   left: 0;
-  height: calc(100vh - 60px); /* Full height minus the navbar height */
-  overflow-y: auto; /* Scrollable content */
-  z-index: 999; /* Ensure it's below the navbar but above other elements */
+  width: 0;
+  height: 100%;
+  background-color: #f4f4f4;
+  overflow-x: hidden;
+  transition: width 0.1s ease;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.side-panel.open {
+  width: 200px; /* Define the width of the open panel */
 }
 
 /* Ensure each chat item takes a full line */
@@ -723,7 +738,6 @@ async function startNewChat() {
 .side-panel::-webkit-scrollbar-thumb:hover {
   background-color: #555;
 }
-
 
 
 </style>
