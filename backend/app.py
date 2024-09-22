@@ -389,7 +389,7 @@ def process_pdf():
 
     # Determine next chat_id
     existing_chats = user_data[email].keys()
-    next_chat_number = len(existing_chats) + 1
+    next_chat_number = len(existing_chats)
     chat_id = f"chat_{next_chat_number}"
     
     active_chat = chat_id
@@ -488,6 +488,7 @@ def chat():
         next_chat_number = len(existing_chats)
         chat_id = f"chat_{next_chat_number}"
         session['active_chat_id'] = chat_id  # Set it in session
+        # active_chat = chat_id
 
     if chat_id not in user_data[email]:
         user_data[email][chat_id] = {
@@ -653,6 +654,7 @@ def load_chat():
         
         session['active_chat_id'] = chat_id
         active_chat = session['active_chat_id']
+
         print(active_chat)
         
         
@@ -671,6 +673,7 @@ def load_chat():
 # New route to start a new chat
 @app.route('/new_chat', methods=['POST'])
 def new_chat():
+    global active_chat
     # Determine next chat_id if not provided
     user_data_file = app.config['USER_DATA_FILE']
     with open(user_data_file, 'r', encoding='utf-8') as file:
@@ -691,6 +694,10 @@ def new_chat():
     #         "prompts": [],
     #         "extracted_data": {}
     #     }
+    
+    session['active_chat_id'] = next_chat_id
+    active_chat = session['active_chat_id']
+    print(active_chat)
     
     update_user_data(email, next_chat_id, "", "", user_data[email][prev_chat_id]["extracted_data"])
     

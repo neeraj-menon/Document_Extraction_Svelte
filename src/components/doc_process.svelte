@@ -104,7 +104,7 @@
       if (file) {
           pdfFile = file;
           pdfFilename = file.name;
-          pdfThumbnail = URL.createObjectURL(file);
+          pdfThumbnail = pdfThumbnail;
       }
   };
 
@@ -114,7 +114,7 @@
       if (file) {
           promptFile = file;
           promptFilename = file.name;
-          promptThumbnail = URL.createObjectURL(file);
+          promptThumbnail = pdfThumbnail;
       }
   };
 
@@ -145,6 +145,8 @@
       formDataPrompt.append('filename', promptFilename);
 
       try {
+
+        await startNewChat();
           processing = true;
           progressPercentage = 0; // Reset progress
           getProgress(); // Simulate progress locally for now
