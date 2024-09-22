@@ -1,6 +1,10 @@
 <script>
   import { onMount } from 'svelte';
 
+    // import pdfThumbnail from '../../DocEx_frontend/icons/pdf.png';
+    // import promptThumbnail from '../../DocEx_frontend/icons/txt.png';
+
+  
   let pdfFile = null;
   let promptFile = null;
   let pdfFilename = '';
@@ -8,11 +12,12 @@
   let jsonResponse = '';
   let processing = false;
   let errorMessage = '';
-  let pdfThumbnail = '';
-  let promptThumbnail = '';
+  let pdfThumbnail = '/icons/pdf.png';
+  let promptThumbnail = '/icons/txt.png';
   let processingStatus = '';
   let progressPercentage = 0;
   let downloadUrl = ''; // URL to download the JSON result
+  let userEmail = '';
 
   // Chatbot state
   let chatData = []; // Holds the current chat session
@@ -28,25 +33,90 @@
   let fetchResultsHistoryError = null; // Error handling for results history
   let resultsHistory = []; // Holds the list of previous results
 
-  // Function to handle PDF file upload and store its name
-  const handlePDFUpload = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-          pdfFile = file;
-          pdfFilename = file.name;
-          pdfThumbnail = URL.createObjectURL(file);
-      }
-  };
 
-  // Function to handle prompt file upload and store its name
-  const handlePromptUpload = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-          promptFile = file;
-          promptFilename = file.name;
-          promptThumbnail = URL.createObjectURL(file);
-      }
-  };
+
+    
+  onMount(async () => {
+        const response = await fetch('http://localhost:5000/user_profile', {
+            credentials: 'include' // Include cookies for session
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            userEmail = data.email; // Store the user's email
+        } else {
+            // Handle error (e.g., user not authenticated)
+            console.error('Failed to fetch user profile');
+        }
+    });
+
+
+
+
+    // Handle drag over for both PDF and Prompt
+    function handleDragOver(event) {
+        event.preventDefault(); // Prevent default behavior to allow file dropping
+    }
+
+    // Handle drop event for PDF file
+    function handlePDFDrop(event) {
+        event.preventDefault(); // Prevent default behavior
+        const file = event.dataTransfer.files[0]; // Get the first file
+        if (file && file.type === 'application/pdf') {
+            pdfFilename = file.name; // Store filename for display
+            pdfThumbnail = URL.createObjectURL(file); // You can also generate a thumbnail if needed
+        }
+    }
+
+    // Handle drop event for Prompt file
+    function handlePromptDrop(event) {
+        event.preventDefault(); // Prevent default behavior
+        const file = event.dataTransfer.files[0]; // Get the first file
+        if (file && file.type === 'text/plain') {
+            promptFilename = file.name; // Store filename for display
+            // You can also generate a thumbnail if needed for .txt (not common)
+        }
+    }
+
+    // Handle file upload for PDF from the input element
+    function handlePDFUpload(event) {
+        const file = event.target.files[0];
+        pdfFilename = file.name;
+        pdfThumbnail = URL.createObjectURL(file); // Generate a URL for the PDF file
+    }
+
+    // Handle file upload for Prompt from the input element
+    function handlePromptUpload(event) {
+        const file = event.target.files[0];
+        promptFilename = file.name;
+        // Handle any further processing for the .txt file
+    }
+
+
+
+
+
+
+
+//   // Function to handle PDF file upload and store its name
+//   const handlePDFUpload = (event) => {
+//       const file = event.target.files[0];
+//       if (file) {
+//           pdfFile = file;
+//           pdfFilename = file.name;
+//           pdfThumbnail = URL.createObjectURL(file);
+//       }
+//   };
+
+//   // Function to handle prompt file upload and store its name
+//   const handlePromptUpload = (event) => {
+//       const file = event.target.files[0];
+//       if (file) {
+//           promptFile = file;
+//           promptFilename = file.name;
+//           promptThumbnail = URL.createObjectURL(file);
+//       }
+//   };
 
   const getProgress = () => {
       const eventSource = new EventSource('http://localhost:5000/progress');
@@ -316,7 +386,7 @@ async function startNewChat() {
 </script>
 
 <!-- Add the navigation bar -->
-<div class="navbar">
+<!-- <div class="navbar">
   <div class="navbar-content">
       <button on:click={togglePanel} class="prev-chat-button">
         {isPanelOpen ? 'Close Chat History' : 'Open Chat History'}
@@ -326,34 +396,107 @@ async function startNewChat() {
           Logout
       </button>
   </div>
-</div>
+</div> -->
+
+
+
+<!-- Add the navigation bar -->
+<div class="navbar">
+    <div class="navbar-content">
+        <button on:click={togglePanel} class="prev-chat-button">
+          {#if isPanelOpen}
+            <!-- Close icon (X) -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          {:else}
+            <!-- Menu icon (hamburger) -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          {/if}
+        </button>
+        <span class="logo">DocEx</span>
+        <span class="user-email">Welcome, {userEmail}</span> <!-- Display the user's email here -->
+        <button on:click={handleLogout} class="logout-button">
+            <!-- Logout icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H3" />
+            </svg>
+        </button>
+        
+    </div>
+  </div>
+  
+
+
+
 
 <div class="flex justify-between p-4">
   <!-- Left Panel -->
   <div class="left-panel {isPanelOpen ? 'shifted' : ''}">
-      <h1 class="text-2xl font-bold mb-4">Document Processing</h1>
+      <!-- <h1 class="text-2xl font-bold mb-4">Document Processing</h1> -->
 
-      <div class="mb-4">
-          <label for="pdf" class="block text-lg font-medium">Upload PDF</label>
-          <input type="file" id="pdf" accept=".pdf" on:change={handlePDFUpload} class="mt-2"/>
-          {#if pdfThumbnail}
-              <img src={pdfThumbnail} alt="PDF Thumbnail" class="mt-2 w-32 h-auto"/>
-          {/if}
-          {#if pdfFilename}
-              <p class="text-gray-600 mt-1">Selected file: {pdfFilename}</p>
-          {/if}
-      </div>
 
-      <div class="mb-4">
-          <label for="prompt" class="block text-lg font-medium">Upload Prompt</label>
-          <input type="file" id="prompt" accept=".txt" on:change={handlePromptUpload} class="mt-2"/>
-          {#if promptThumbnail}
-              <img src={promptThumbnail} alt="Prompt Thumbnail" class="mt-2 w-32 h-auto"/>
-          {/if}
-          {#if promptFilename}
-              <p class="text-gray-600 mt-1">Selected file: {promptFilename}</p>
-          {/if}
-      </div>
+
+
+      
+      <div class="flex justify-between items-start mb-4">
+        <!-- PDF Upload Container -->
+        <div class="mb-4">
+            <label for="pdf" class="block text-lg font-medium mb-2">Upload PDF</label>
+            <div
+                role="button"
+                aria-label="Upload PDF"
+                on:drop={handlePDFDrop}
+                on:dragover={handleDragOver}
+                on:click={() => document.getElementById('pdf').click()}
+                on:keydown={(e) => e.key === 'Enter' && document.getElementById('pdf').click()}
+                tabindex="0"
+                class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition ease-in-out duration-300"
+            >
+                {#if pdfThumbnail}
+                    <img src={pdfThumbnail} alt="PDF Thumbnail" class="mt-2 w-12 h-auto mx-auto"/>
+                {/if}
+                {#if pdfFilename}
+                    <p class="text-gray-600 mt-1">Selected file: {pdfFilename}</p>
+                {:else}
+                    <p class="text-gray-600">Drag & drop a PDF file here, or <span class="text-blue-500 underline">browse</span></p>
+                {/if}
+                <input type="file" id="pdf" accept=".pdf" class="hidden" on:change={handlePDFUpload}/>
+            </div>
+        </div>
+    
+        <!-- Prompt Upload Container -->
+        <div class="mb-4">
+            <label for="prompt" class="block text-lg font-medium mb-2">Upload Prompt</label>
+            <div
+                role="button"
+                aria-label="Upload Prompt"
+                on:drop={handlePromptDrop}
+                on:dragover={handleDragOver}
+                on:click={() => document.getElementById('prompt').click()}
+                on:keydown={(e) => e.key === 'Enter' && document.getElementById('prompt').click()}
+                tabindex="0"
+                class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition ease-in-out duration-300"
+            >
+                {#if promptThumbnail}
+                    <img src={promptThumbnail} alt="Prompt Thumbnail" class="mt-2 w-12 h-auto mx-auto"/>
+                {/if}
+                {#if promptFilename}
+                    <p class="text-gray-600 mt-1">Selected file: {promptFilename}</p>
+                {:else}
+                    <p class="text-gray-600">Drag & drop a text file here, or <span class="text-blue-500 underline">browse</span></p>
+                {/if}
+                <input type="file" id="prompt" accept=".txt" class="hidden" on:change={handlePromptUpload}/>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
 
       <button on:click={processFiles} disabled={processing} class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:opacity-50">
           {processing ? 'Processing...' : 'Process Files'}
@@ -455,11 +598,12 @@ async function startNewChat() {
       <!-- Side Panel -->
       <!-- {#if isPanelOpen} -->
           <div class="side-panel {isPanelOpen ? 'open' : ''}">
-              <h3 class="text-lg font-bold">Previous Chats</h3>
+            <h3 class="text-lg text-center p-4">Previous Chats</h3>
+
               {#if fetchChatHistoryError}
                   <div class="text-red-500">{fetchChatHistoryError}</div>
               {:else if chatHistory.length > 0}
-                <button on:click={startNewChat} class="new-chat-btn">Start New Chat</button>
+                <button on:click={startNewChat} class="new-chat-btn">+ Start New Chat</button>
                   {#each chatHistory as chat}
                       <button
                           class="chat-item"
@@ -488,6 +632,10 @@ async function startNewChat() {
   background-color: #333;
   color: white;
   z-index: 1000;
+}
+
+.user-email{
+    margin-left: 50px;
 }
 
 
@@ -531,6 +679,8 @@ async function startNewChat() {
   .logo {
       font-size: 1.5em;
       font-weight: bold;
+      margin-right: 400px;
+      margin-left: 800px;
   }
 
   .logout-button {
@@ -542,7 +692,7 @@ async function startNewChat() {
       cursor: pointer;
       border-radius: 5px;
       margin-right: 20px;
-      margin-left: 70px;
+      margin-left: 10px;
       margin-top: 7px;
   }
 
@@ -570,7 +720,7 @@ async function startNewChat() {
   .chat-container {
       display: flex;
       flex-direction: column;
-      height: 400px; /* Adjust the height as needed */
+      height: 550px; /* Adjust the height as needed */
       border: 1px solid #ddd;
       border-radius: 8px;
       overflow: hidden;
@@ -580,7 +730,7 @@ async function startNewChat() {
   .chat-messages {
     display: flex;
     flex-direction: column;
-      height: 300px;
+      height: 450px;
       overflow-y: auto;
       background-color: #f9f9f9;
       padding: 10px;
@@ -626,12 +776,14 @@ async function startNewChat() {
       padding: 10px;
       border-top: 1px solid #ddd;
       background: #fff;
+      height: 60px; /* Set a fixed height for the input area */
   }
 
   .chat-input input {
       width: 80%;
       padding: 10px;
       margin-right: 10px;
+      margin-top: 25px;
   }
 
   .chat-input button {
@@ -664,6 +816,9 @@ async function startNewChat() {
       border-radius: 5px;
       margin-top: 20px;
       margin-bottom: 20px;
+      margin-left: 10px;
+      margin-right: 10px;
+      width: 90%;
   }
 
   /* Container for scrollable JSON response */
@@ -697,25 +852,32 @@ async function startNewChat() {
   left: 0;
   width: 0;
   height: 100%;
-  background-color: #f4f4f4;
+  /* background-color: #f4f4f4; */
+  background-color: #ffffff;
   overflow-x: hidden;
+  overflow-y: auto;
   transition: width 0.1s ease;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  /* padding: 20px 10px;  */
 }
 
 .side-panel.open {
-  width: 200px; /* Define the width of the open panel */
+  width: 250px; /* Define the width of the open panel */
 }
 
 /* Ensure each chat item takes a full line */
 .chat-item {
-  display: block; /* Each chat item will be displayed in its own line */
+  display: flex; /* Each chat item will be displayed in its own line */
   padding: 10px;
   background-color: white;
+  width:90%;
   margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   margin-top: 10px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
 }

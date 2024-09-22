@@ -110,6 +110,12 @@ def callback():
 def dashboard():
     return f'Hello, {session["profile"]["name"]}! <a href="/logout">Logout</a>'
 
+@app.route('/user_profile')
+@requires_auth
+def user_profile():
+    return jsonify(session['profile'])
+
+
 @app.route('/logout')
 def logout():
     session.clear()
