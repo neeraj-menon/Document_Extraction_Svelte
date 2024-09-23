@@ -527,7 +527,10 @@ async function startNewChat() {
 
       <!-- Chatbot -->
       <div class="w-full mt-6">
-          <h2 class="text-xl font-bold mb-2">Chatbot</h2>
+        <img src="/icons/chatbot.png" alt="AI Assistant" class="w-6 h-6 mr-2">
+    
+        <!-- AI Assistant Text -->
+        <h2 class="text-xl  mb-2">AI Assistant</h2>
           <div class="chat-container">
               <div class="chat-messages">
                 {#if chat_Data && chat_Data.length > 0}
@@ -559,15 +562,20 @@ async function startNewChat() {
               </div>
 
               <!-- Input for user to type and send messages -->
-              <div class="chat-input">
-                  <input
-                      type="text"
-                      placeholder="Ask me anything about the processed results..."
-                      bind:value={userInput}
-                  />
-                  <button on:click={sendMessage} class="send-msg-btn">Send</button>
-                  <!-- <button on:click={startNewChat} class="new-chat-btn">Start New Chat</button> -->
-              </div>
+            <div class="chat-input flex items-center justify-center h-full">
+                <input
+                    type="text"
+                    placeholder="Ask me anything about the processed results..."
+                    class="placeholder-centered"
+                    bind:value={userInput}
+                />
+                <button on:click={sendMessage} class="send-msg-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l18-9-9 18-2-7-7-2z" />
+                    </svg>
+                </button>
+            </div>
+
           </div>
       </div>
   </div>
@@ -587,20 +595,25 @@ async function startNewChat() {
       {/if} -->
 
       {#if jsonResponse}
-        <div class="p-4 border border-gray-300 bg-gray-100">
-          <h3 class="text-xl font-semibold mb-2">Processed Result:</h3>
+  <div class="p-6 bg-gray-50 rounded-xl shadow-md border border-gray-200">
+    <h3 class="text-xl font-semibold mb-4 text-gray-800">Processed Result:</h3>
 
-          <!-- Scrollable JSON response -->
-          <div class="json-container">
-            <pre class="whitespace-pre-wrap">{jsonResponse}</pre>
-          </div>
+    <!-- Scrollable JSON response -->
+    <div class="json-container">
+      <pre class="whitespace-pre-wrap text-gray-700">{jsonResponse}</pre>
+    </div>
 
-          <!-- Download button for the JSON file -->
-          <a href={downloadUrl} download class="bg-green-500 text-white py-2 px-4 rounded mt-4 inline-block hover:bg-green-600">
-            Download JSON Result
-          </a>
-        </div>
-      {/if}
+    <!-- Download button for the JSON file -->
+    <a 
+      href={downloadUrl} 
+      download 
+      class="download_json bg-green-500 text-white py-2 px-6 rounded-lg mt-4 inline-block hover:bg-green-600 transition duration-200 ease-in-out"
+    >
+      <span>Download JSON Result</span>
+    </a>
+  </div>
+{/if}
+
       </div>
 
 
@@ -734,20 +747,40 @@ async function startNewChat() {
   .chat-container {
       display: flex;
       flex-direction: column;
-      height: 620px; /* Adjust the height as needed */
+      height: 665px; /* Adjust the height as needed */
       border: 1px solid #ddd;
       border-radius: 8px;
       overflow: hidden;
       background-color: #f9f9f9;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.15); /* More prominent shadow */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.08); /* More prominent shadow */
   }
+
+  /* Add a slight elevation effect on hover */
+.chat-container:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 6px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Optional: Scrollbar styling */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background-color: #9ca3af; /* Subtle gray thumb color */
+    border-radius: 8px;
+    border: 2px solid #f8fafc; /* Matches the container background */
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background-color: #6b7280; /* Slightly darker hover color */
+}
 
   .chat-messages {
     display: flex;
     flex-direction: column;
-      height: 530px;
+      height: 585px;
       overflow-y: auto;
-      background-color: #f9f9f9;
+      background-color: #f8fafc;;
       padding: 10px;
       margin-bottom: 10px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -801,6 +834,11 @@ async function startNewChat() {
       margin-top: 25px;
   }
 
+  .placeholder-centered {
+  display: block; /* Ensure the placeholder is displayed as a block element */
+  margin-bottom: 30px; /* Center the placeholder vertically */
+}
+
   .chat-input button {
       padding: 10px 20px;
   }
@@ -812,12 +850,25 @@ async function startNewChat() {
       padding: 20px 20px;
       font-size: 1em;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 50px;
       align-items: center;
-      margin-left: 70px;
-      margin-top: 10px;
+      margin-left: 90px;
+      margin-top: 1px;
 
   }
+
+  .send-msg-btn:hover {
+    background-color: #1b51c5; /* Darker blue on hover */
+}
+
+.send-msg-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2;
+    stroke: white; /* Icon color */
+}
+
+
 
   .new-chat-btn {
       /* background-color: red;
@@ -836,29 +887,52 @@ async function startNewChat() {
       width: 90%;
   }
 
-  /* Container for scrollable JSON response */
-  .json-container {
-    max-height: 730px; /* Adjust height as needed */
-    overflow-y: auto;  /* Enable vertical scrolling */
-    background-color: #ffffff; /* Optional: white background for readability */
-    padding: 10px;
-    border: 1px solid #ccc; /* Optional: border to separate the scrollable area */
-    border-radius: 4px;
-  }
+  /* Modernized container for scrollable JSON response */
+.json-container {
+    max-height: 755px; /* Adjust height as needed */
+    overflow-y: auto;
+    background-color: #f8fafc; /* Light gray background for readability */
+    padding: 20px;
+    border: 1px solid #e5e7eb; /* Light border */
+    border-radius: 8px; /* Smoother corner radius */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+    font-family: 'Inter', sans-serif; /* Modern font */
+    color: #111827; /* Dark text color */
+    font-size: 14px;
+    line-height: 1.6;
+}
 
-  /* Optional: Custom scrollbar styling (for WebKit browsers) */
-  .json-container::-webkit-scrollbar {
+/* Custom scrollbar styling for WebKit browsers */
+.json-container::-webkit-scrollbar {
     width: 8px;
-  }
+}
 
-  .json-container::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 4px;
-  }
+.json-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Light track color */
+    border-radius: 8px;
+}
 
-  .json-container::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
-  }
+.json-container::-webkit-scrollbar-thumb {
+    background-color: #9ca3af; /* Subtle gray thumb color */
+    border-radius: 8px;
+    border: 2px solid #f8fafc; /* Matches the container background */
+}
+
+.json-container::-webkit-scrollbar-thumb:hover {
+    background-color: #6b7280; /* Slightly darker hover color */
+}
+
+/* Hover effect for better user experience */
+.json-container:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08); /* Elevation on hover */
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.download_json{
+    margin-top: 30px;
+    border-radius: 50px;
+
+}
 
   /* Sidebar styles */
   .side-panel {
