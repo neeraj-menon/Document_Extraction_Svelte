@@ -352,6 +352,9 @@ async function startNewChat() {
   // Function to load a selected chat
   const loadChat = async (chat) => {
       selectedChat = chat;
+      // Clear the chat display before loading the previous chat
+    chatData = [];  // Clear current chat messages
+    chat_Data = []; // Clear any additional chat data if necessary
       try {
           const response = await fetch(`http://localhost:5000/load_chat?chat_id=${chat.chat_id}`);
           if (!response.ok) {
@@ -493,16 +496,20 @@ async function startNewChat() {
                 <input type="file" id="prompt" accept=".txt" class="hidden" on:change={handlePromptUpload}/>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
     
 
 
 
 
+    <div class="process-files">
 
       <button on:click={processFiles} disabled={processing} class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:opacity-50">
           {processing ? 'Processing...' : 'Process Files'}
       </button>
+      </div>
+      </div>
+
 
       {#if errorMessage}
           <div class="text-red-500 mt-4">{errorMessage}</div>
@@ -659,6 +666,11 @@ async function startNewChat() {
   margin-left: 0;
 }
 
+.process-files{
+    margin-top: 30px;
+}
+
+
 
 
 
@@ -722,17 +734,18 @@ async function startNewChat() {
   .chat-container {
       display: flex;
       flex-direction: column;
-      height: 550px; /* Adjust the height as needed */
+      height: 620px; /* Adjust the height as needed */
       border: 1px solid #ddd;
       border-radius: 8px;
       overflow: hidden;
       background-color: #f9f9f9;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 6px 6px rgba(0, 0, 0, 0.15); /* More prominent shadow */
   }
 
   .chat-messages {
     display: flex;
     flex-direction: column;
-      height: 450px;
+      height: 530px;
       overflow-y: auto;
       background-color: #f9f9f9;
       padding: 10px;

@@ -97,8 +97,11 @@ def callback():
     if email_id_forjson in user_data.keys():
     
         # Determine next chat_id
-        existing_chats = user_data[email_id_forjson].keys()
-        next_chat_number = len(existing_chats)
+        existing_chats = list(user_data[email_id_forjson].keys())
+        next_chat_number = existing_chats[-1]
+        next_chat_number = int(next_chat_number[-1])
+        # chat_id = f"chat_{next_chat_number}"
+        # next_chat_number = len(existing_chats)
         active_chat = f"chat_{next_chat_number}"
         print(active_chat)
 
@@ -389,8 +392,12 @@ def process_pdf():
         user_data[email] = {}
 
     # Determine next chat_id
-    existing_chats = user_data[email].keys()
-    next_chat_number = len(existing_chats)
+    # existing_chats = user_data[email].keys()
+    # next_chat_number = len(existing_chats)
+    
+    existing_chats = list(user_data[email].keys())
+    next_chat_number = existing_chats[-1]
+    next_chat_number = int(next_chat_number[-1])
     chat_id = f"chat_{next_chat_number}"
     
     session['active_chat_id'] = chat_id
@@ -432,9 +439,16 @@ def download_results():
     # email = session['profile']['email']
     # email = session.get('profile', {}).get('email')
     email = email_id_forjson
-    existing_chats = user_data[email].keys()
-    next_chat_number = len(existing_chats)
+    # existing_chats = user_data[email].keys()
+    # next_chat_number = len(existing_chats)
+    # chat_id = f"chat_{next_chat_number}"
+    
+    
+    existing_chats = list(user_data[email].keys())
+    next_chat_number = existing_chats[-1]
+    next_chat_number = int(next_chat_number[-1])
     chat_id = f"chat_{next_chat_number}"
+    
     
     if email not in user_data:
         return jsonify({'error': 'User data not found'}), 404
@@ -488,9 +502,16 @@ def chat():
     print(chat_id)
     if not chat_id:
         # Determine next chat_id
-        existing_chats = user_data[email].keys()
-        next_chat_number = len(existing_chats)
+        # existing_chats = user_data[email].keys()
+        # next_chat_number = len(existing_chats)
+        # chat_id = f"chat_{next_chat_number}"
+        
+        existing_chats = list(user_data[email].keys())
+        next_chat_number = existing_chats[-1]
+        next_chat_number = int(next_chat_number[-1])
         chat_id = f"chat_{next_chat_number}"
+        
+        
         session['active_chat_id'] = chat_id  # Set it in session
         # active_chat = chat_id
 
@@ -685,9 +706,12 @@ def new_chat():
 
     
     email = email_id_forjson
-    existing_chats = user_data[email].keys()
+    existing_chats = list(user_data[email].keys())
+    print(existing_chats)
     prev_chat_number = len(existing_chats) 
-    next_chat_number = len(existing_chats) + 1
+    # next_chat_number = len(existing_chats) + 1
+    next_chat_number = existing_chats[-1]
+    next_chat_number = int(next_chat_number[-1]) + 1
     print(next_chat_number)
     prev_chat_id = f"chat_{prev_chat_number}" 
     next_chat_id = f"chat_{next_chat_number}" 
@@ -703,7 +727,8 @@ def new_chat():
     active_chat = session['active_chat_id']
     print(active_chat)
     
-    update_user_data(email, next_chat_id, "", "", user_data[email][prev_chat_id]["extracted_data"])
+    # update_user_data(email, next_chat_id, "", "", user_data[email][prev_chat_id]["extracted_data"])
+    update_user_data(email, next_chat_id, "", "", "{}")
     
     with open(user_data_file, 'r', encoding='utf-8') as file:
         user_data = json.load(file)
