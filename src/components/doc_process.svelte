@@ -421,11 +421,11 @@ async function startNewChat() {
             </svg>
           {/if}
         </button>
-        <span class="logo">DocEx</span>
+        <span class="logo">MedData</span>
         <span class="user-email">Welcome, {userEmail}</span> <!-- Display the user's email here -->
         <button on:click={handleLogout} class="logout-button">
             <!-- Logout icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H3" />
             </svg>
         </button>
@@ -448,7 +448,7 @@ async function startNewChat() {
       
       <div class="flex justify-between items-start mb-4">
         <!-- PDF Upload Container -->
-        <div class="mb-4">
+        <div class="mb-4 min-w-[400px]">
             <label for="pdf" class="block text-lg font-medium mb-2">Upload PDF</label>
             <div
                 role="button"
@@ -466,14 +466,18 @@ async function startNewChat() {
                 {#if pdfFilename}
                     <p class="text-gray-600 mt-1">Selected file: {pdfFilename}</p>
                 {:else}
-                    <p class="text-gray-600">Drag & drop a PDF file here, or <span class="text-blue-500 underline">browse</span></p>
+                    <p class="text-gray-600">Drag & drop a PDF file here, or <button 
+                        class="border border-blue-500 text-blue-500 px-2 py-1 rounded-md hover:bg-blue-500 hover:text-white transition ease-in-out duration-300"
+                    >
+                        browse
+                    </button></p>
                 {/if}
                 <input type="file" id="pdf" accept=".pdf" class="hidden" on:change={handlePDFUpload}/>
             </div>
         </div>
     
         <!-- Prompt Upload Container -->
-        <div class="mb-4">
+        <div class="mb-4 min-w-[400px]">
             <label for="prompt" class="block text-lg font-medium mb-2">Upload Prompt</label>
             <div
                 role="button"
@@ -491,7 +495,11 @@ async function startNewChat() {
                 {#if promptFilename}
                     <p class="text-gray-600 mt-1">Selected file: {promptFilename}</p>
                 {:else}
-                    <p class="text-gray-600">Drag & drop a text file here, or <span class="text-blue-500 underline">browse</span></p>
+                    <p class="text-gray-600">Drag & drop a text file here, or <button 
+                        class="border border-blue-500 text-blue-500 px-2 py-1 rounded-md hover:bg-blue-500 hover:text-white transition ease-in-out duration-300"
+                    >
+                        browse
+                    </button></p>
                 {/if}
                 <input type="file" id="prompt" accept=".txt" class="hidden" on:change={handlePromptUpload}/>
             </div>
@@ -504,8 +512,15 @@ async function startNewChat() {
 
     <div class="process-files">
 
-      <button on:click={processFiles} disabled={processing} class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:opacity-50">
-          {processing ? 'Processing...' : 'Process Files'}
+      <button on:click={processFiles} disabled={processing} class="process-button bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:opacity-50">
+        {#if processing}
+        <svg class="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+        </svg>
+    {:else}
+    <img src="/icons/process.png" alt="Process Files" class="w-6 h-6 ">
+    {/if}
       </button>
       </div>
       </div>
@@ -570,7 +585,7 @@ async function startNewChat() {
                     bind:value={userInput}
                 />
                 <button on:click={sendMessage} class="send-msg-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l18-9-9 18-2-7-7-2z" />
                     </svg>
                 </button>
@@ -595,7 +610,7 @@ async function startNewChat() {
       {/if} -->
 
       {#if jsonResponse}
-  <div class="p-6 bg-gray-50 rounded-xl shadow-md border border-gray-200">
+  <div class="processed-container p-6 bg-gray-50 rounded-xl shadow-md border border-gray-200">
     <h3 class="text-xl font-semibold mb-4 text-gray-800">Processed Result:</h3>
 
     <!-- Scrollable JSON response -->
@@ -607,9 +622,14 @@ async function startNewChat() {
     <a 
       href={downloadUrl} 
       download 
-      class="download_json bg-green-500 text-white py-2 px-6 rounded-lg mt-4 inline-block hover:bg-green-600 transition duration-200 ease-in-out"
+      class="download_json bg-green-500 text-white py-2 px-6 rounded-lg mt-4 inline-block hover:bg-green-600 transition duration-200 ease-in-out flex justify-center items-center"
     >
-      <span>Download JSON Result</span>
+    <img src="/icons/download_json.png" alt="Download" class="w-5 h-5">
+      <!-- <span>Download JSON Result</span> -->
+       <!-- Tooltip -->
+  <span class="tooltip-text bg-gray-700 text-white text-sm rounded py-1 px-2 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 transition-opacity duration-300">
+    Download JSON
+  </span>
     </a>
   </div>
 {/if}
@@ -645,24 +665,37 @@ async function startNewChat() {
 </div>
 
 <style lang='postcss'> 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+:global(body) {
+    background-color: #ffffff; /* Light background color to complement the navbar */
+    font-family: 'Poppins', sans-serif; /* Set a clean font for better readability */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
   
   .navbar {
   /* position: fixed; */
   top: 0;
   width: 100%;
   height: 60px; /* Adjust this height according to your navbar */
-  background-color: #333;
-  color: white;
+  background: linear-gradient(135deg, #a6b3db 0%, #f6f6f8 100%);
+  color: rgb(27, 27, 27);
   z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .user-email{
     margin-left: 50px;
+    margin-top: 10px;
+    font-size: 13px;
 }
 
 
 .left-panel {
-  width: 50%;              /* Equivalent to 'w-1/2' (50% width) */
+  width: 60%;              /* Equivalent to 'w-1/2' (50% width) */
   padding-right: 1rem;     /* Equivalent to 'pr-4' (padding-right 1rem or 16px) */
   transition: margin-left 0.3s ease;
   margin-left: 0;
@@ -673,7 +706,7 @@ async function startNewChat() {
 }
 
 .right-panel {
-  width: 50%;              /* Equivalent to 'w-1/2' (50% width) */
+  width: 40%;              /* Equivalent to 'w-1/2' (50% width) */
   padding-left: 1rem;      /* Equivalent to 'pl-4' (padding-left 1rem or 16px) */
   transition: margin-left 0.3s ease;
   margin-left: 0;
@@ -681,14 +714,17 @@ async function startNewChat() {
 
 .process-files{
     margin-top: 30px;
+    
+}
+
+.process-button{
+    border-radius: 50px;
 }
 
 
-
-
-
 .prev-chat-button {
-    background-color: #6b7280; 
+    background-color: #7190cc; 
+    /* background: linear-gradient(135deg, #919dbe 0%, #f6f6f8 100%); */
     color: white;
     padding: 0.5rem 1rem; 
     border-radius: 0.375rem; 
@@ -708,6 +744,8 @@ async function startNewChat() {
       font-weight: bold;
       margin-right: 400px;
       margin-left: 800px;
+      margin-top: 10px;
+      color: white;
   }
 
   .logout-button {
@@ -720,7 +758,8 @@ async function startNewChat() {
       border-radius: 5px;
       margin-right: 20px;
       margin-left: 10px;
-      margin-top: 7px;
+      margin-top: 9px;
+      border-radius: 50px;
   }
 
   .logout-button:hover {
@@ -734,6 +773,7 @@ async function startNewChat() {
     border-radius: 50px; /* More rounded for a sleek look */
     overflow: hidden;
     margin: 12px 0; /* Slightly more spacing for a cleaner feel */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .progress {
@@ -747,7 +787,7 @@ async function startNewChat() {
   .chat-container {
       display: flex;
       flex-direction: column;
-      height: 665px; /* Adjust the height as needed */
+      height: 575px; /* Adjust the height as needed */
       border: 1px solid #ddd;
       border-radius: 8px;
       overflow: hidden;
@@ -778,7 +818,7 @@ async function startNewChat() {
   .chat-messages {
     display: flex;
     flex-direction: column;
-      height: 585px;
+      height: 590px;
       overflow-y: auto;
       background-color: #f8fafc;;
       padding: 10px;
@@ -786,36 +826,35 @@ async function startNewChat() {
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  /* .chat-message.user {
-      text-align: right;
-  } */
 
-
-  .chat-message.user {
-    text-align: right;
-    max-width: 75%; /* Limit the width for readability */
+  /* User message styling */
+.chat-message.user {
+    max-width: 70%;
     margin: 8px 0;
-    padding: 10px 15px;
+    padding: 12px 16px;
     border-radius: 20px;
-    background-color: #007bff; /* Clean blue color */
-    color: white; /* White text for contrast */
-    align-self: flex-end; /* Aligns user messages to the right */
-    border-bottom-right-radius: 0; /* Flat edge on the right side */
+    background: linear-gradient(135deg, #1d4ed8 0%, #6278c0 100%); /* Blue gradient */
+    color: white;
+    align-self: flex-end;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+    border-bottom-right-radius: 0;
+    font-size: 13.5px;
+    /* font-weight: bold; */
 }
 
-  /* .chat-message.bot {
-      text-align: left;
-  } */
-
-  .chat-message.bot {
-    max-width: 75%; /* Limit the width for readability */
+/* Bot message styling */
+.chat-message.bot {
+    max-width: 70%;
     margin: 8px 0;
-    padding: 10px 15px;
+    padding: 12px 16px;
     border-radius: 20px;
-    background-color: #28a745; /* Modern green color */
-    color: white; /* White text for contrast */
-    align-self: flex-start; /* Aligns bot messages to the left */
-    border-bottom-left-radius: 0; /* Flat edge on the left side */
+    background: linear-gradient(135deg, #059669 0%, #33c49b 100%); /* Green gradient */
+    color: white;
+    align-self: flex-start;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-bottom-left-radius: 0;
+    font-size: 13.5px;
+    /* font-weight: bold; */
 }
 
   .chat-input {
@@ -847,7 +886,7 @@ async function startNewChat() {
     background-color: #2563eb; 
       color: white;
       border: none;
-      padding: 20px 20px;
+      /* padding: 20px 20px; */
       font-size: 1em;
       cursor: pointer;
       border-radius: 50px;
@@ -862,8 +901,8 @@ async function startNewChat() {
 }
 
 .send-msg-btn svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     stroke-width: 2;
     stroke: white; /* Icon color */
 }
@@ -887,16 +926,21 @@ async function startNewChat() {
       width: 90%;
   }
 
+
+  .processed-container{
+    height: 837px; /* Adjust height as needed */
+  }
+
   /* Modernized container for scrollable JSON response */
 .json-container {
-    max-height: 755px; /* Adjust height as needed */
+    height: 697px; /* Adjust height as needed */
     overflow-y: auto;
     background-color: #f8fafc; /* Light gray background for readability */
     padding: 20px;
     border: 1px solid #e5e7eb; /* Light border */
     border-radius: 8px; /* Smoother corner radius */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
-    font-family: 'Inter', sans-serif; /* Modern font */
+    font-family: 'Poppins', sans-serif; /* Modern font */
     color: #111827; /* Dark text color */
     font-size: 14px;
     line-height: 1.6;
@@ -929,9 +973,30 @@ async function startNewChat() {
 }
 
 .download_json{
-    margin-top: 30px;
+    border: none;
+    position: relative;
+    /* padding: 20px 20px; */
+    width: 70px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 50px;
+    align-items: center;
+    margin-top: 20px;
+    /* margin-right: 50%;
+    margin-left: 50%; */
     border-radius: 50px;
 
+}
+
+.tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.download_json:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
 
   /* Sidebar styles */
@@ -969,6 +1034,7 @@ async function startNewChat() {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 14px;
 }
 
 /* Add hover effect */
