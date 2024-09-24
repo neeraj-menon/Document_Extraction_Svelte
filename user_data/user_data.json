@@ -131,6 +131,10 @@
                 {
                     "prompt": "who is zeus?",
                     "response": "In Greek mythology, Zeus (Ζεύς) was the king of the gods and the god of the sky and thunder. He was the youngest child of the Titan Cronus and the Titan Rhea. He was also known as the god of law, justice, and morality.\n\nAs the supreme ruler of Mount Olympus, Zeus wielded immense power and control over the gods, mortals, and the natural world. By his wife, Hera, he fathered a number of notable offspring, including Athena, Apollo, Artemis, Dionysus, Hermes, and many other gods and goddesses.\n\nIn addition to his divine responsibilities, Zeus was also known for his frequent romantic conquests and his iconic role as a protector of mortals from the forces of chaos and destruction. His powerful lightning bolts became a symbol of his power and authority.\n\nThroughout Greek mythology, Zeus is depicted as a wise, just, and far-sighted ruler, who governed the universe with a balance and fairness that maintained order and balance."
+                },
+                {
+                    "prompt": "give me a shorter response",
+                    "response": "Here's a summary of Zeus' character in Greek mythology:\n\nZeus was the king of the gods, god of the sky, and ruler of Mount Olympus. He was known for his power, authority, and control over the gods and mortals. He was a wise, just, and far-sighted ruler who maintained order and balance in the universe. Zeus was also famous for his romantic conquests and his iconic lightning bolts, which symbolized his power."
                 }
             ],
             "extracted_data": "{}",

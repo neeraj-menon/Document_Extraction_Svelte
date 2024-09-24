@@ -578,6 +578,9 @@ def chat():
     # Append user message to the conversation history
     # conversation_history.append({"role": "user", "content": user_message})
     # conversation_history.append(str(user_data[email][chat_id]["extracted_data"]))
+    
+    prompts = user_data[email][chat_id]["prompts"]
+    conversation_history = ' '.join([p['response'] for p in prompts])
 
     # Get the response from Groq
     response = client.chat.completions.create(
@@ -585,7 +588,7 @@ def chat():
         messages=[
             {
         "role": "system",
-        "content": f"You are a helpful assistant who answers questions based on this provided data: {str(user_data[email][chat_id]["extracted_data"])}."
+        "content": f"You are a professional medical report analyst. You act as an assistant who answers questions based on this provided data: {conversation_history + '/n' + str(user_data[email][chat_id]["extracted_data"])}."
             },
             {"role": "user", "content": user_message}
             ],
