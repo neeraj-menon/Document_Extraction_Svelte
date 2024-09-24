@@ -344,6 +344,7 @@ async function startNewChat() {
           const data = await response.json();
           console.log("Data: ",data);
           chatHistory = Array.isArray(data) ? data : []; // Ensure chatHistory is always an array
+          
       } catch (error) {
           fetchChatHistoryError = error.message || 'Failed to fetch chat history';
       }
@@ -653,7 +654,7 @@ async function startNewChat() {
                           on:keydown={(e) => e.key === 'Enter' && loadChat(chat)}
                           tabindex="0"
                       >
-                          <p>{chat.chat_id}</p>
+                          <p>{chat.description}</p>
                       </button>
                   {/each}
               {:else}

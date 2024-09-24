@@ -181,7 +181,7 @@ def setup_user_data_file():
 
 
 
-def update_user_data(email, chat_id, prompt, response, extracted_data):
+def update_user_data(email, chat_id, prompt, response, extracted_data, description):
     """Update the user's JSON file with new chat data."""
     user_data_file = app.config['USER_DATA_FILE']
     
@@ -194,7 +194,8 @@ def update_user_data(email, chat_id, prompt, response, extracted_data):
     if chat_id not in user_data[email]:
         user_data[email][chat_id] = {
             "prompts": [],
-            "extracted_data": {}
+            "extracted_data": {},
+            "description": ""
         }
     
     # Append the prompt-response pair to the list of prompts
@@ -202,6 +203,8 @@ def update_user_data(email, chat_id, prompt, response, extracted_data):
         "prompt": prompt,
         "response": response
     })
+    
+    user_data[email][chat_id]["description"] = description
     
     # Update extracted data if provided
     if extracted_data:
@@ -407,7 +410,7 @@ def process_pdf():
 
     # Update user data
     # update_user_data(email, chat_id, system_prompt, json_data, extracted_text)
-    update_user_data(email, chat_id, "", "", extracted_text)
+    update_user_data(email, chat_id, "", "", extracted_text, "")
     
     # Check if the folder exists
     folder_path = './DocEx_frontend/backend/extracted_images'
@@ -537,7 +540,7 @@ def chat():
     # Set the system prompt
     system_prompt = {
         "role": "system",
-        "content": f"You are a helpful assistant who answers questions based on this provided data: {str(user_data[email][chat_id]["extracted_data"])}."
+        "content": f"You are a helpful medical assistant who answers questions based on this provided data: {str(user_data[email][chat_id]["extracted_data"])}."
     }
     
     # Append user message to the conversation history
@@ -559,15 +562,44 @@ def chat():
     )
 
     assistant_reply = response.choices[0].message.content
-
-    # Update the user's data file with the new prompt and response
-    update_user_data(email, chat_id, user_message, assistant_reply, user_data[email][chat_id]["extracted_data"])
+    
+    # Update the description with the AI-generated summary
+    # user_data[email][chat_id]["description"] = summary
+    if not user_data[email][chat_id]["description"]:
+        summary = generate_summary_with_ai(user_data[email][chat_id]["prompts"])
+        
+    else:
+        summary = user_data[email][chat_id]["description"]
+        
+    update_user_data(email, chat_id, user_message, assistant_reply, user_data[email][chat_id]["extracted_data"], summary)
 
     return jsonify({'reply': assistant_reply}), 200
 
 
 
 
+
+def generate_summary_with_ai(prompts):
+    """Generate a three-word summary using AI."""
+    # Prepare the messages for the AI model
+    
+    client = Groq(api_key="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")
+    
+    conversation_history = ' '.join([p['response'] for p in prompts])
+    
+    summary_response = client.chat.completions.create(
+        model="llama3-8b-8192",
+        messages=[
+            {"role": "system", "content": "Summarize the conversation in three words. Your response must only be the three words and nothing else"},
+            {"role": "user", "content": conversation_history}
+        ],
+        max_tokens=10,  # Adjust as needed
+        temperature=0.5
+    )
+
+    # Get the summary
+    summary = summary_response.choices[0].message.content.strip()
+    return summary
 
 
 
@@ -640,13 +672,14 @@ def chat_history():
         chats = [
             {
                 'chat_id': chat_id,
+                'description': chat_data.get('description', '')
                 # 'prompts': [
                 #     {'prompt': p.get('prompt'), 'response': p.get('response')}
                 #     for p in chat_data.get('prompts', [])
                 # ],
                 # 'extracted_data': chat_data.get('extracted_data', '')  # Return extracted_data as string
             }
-            for chat_id in user_data[email].keys()
+            for chat_id, chat_data in user_data[email].items()
         ]
         print(jsonify(chats))
 
@@ -728,7 +761,7 @@ def new_chat():
     print(active_chat)
     
     # update_user_data(email, next_chat_id, "", "", user_data[email][prev_chat_id]["extracted_data"])
-    update_user_data(email, next_chat_id, "", "", "{}")
+    update_user_data(email, next_chat_id, "", "", "{}", "")
     
     with open(user_data_file, 'r', encoding='utf-8') as file:
         user_data = json.load(file)
