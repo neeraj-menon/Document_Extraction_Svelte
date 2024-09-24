@@ -64,7 +64,7 @@
         const file = event.dataTransfer.files[0]; // Get the first file
         if (file && file.type === 'application/pdf') {
             pdfFilename = file.name; // Store filename for display
-            pdfThumbnail = URL.createObjectURL(file); // You can also generate a thumbnail if needed
+            pdfThumbnail = pdfThumbnail; // You can also generate a thumbnail if needed
         }
     }
 
@@ -74,7 +74,7 @@
         const file = event.dataTransfer.files[0]; // Get the first file
         if (file && file.type === 'text/plain') {
             promptFilename = file.name; // Store filename for display
-            // You can also generate a thumbnail if needed for .txt (not common)
+            promptFilename = promptFilename
         }
     }
 
@@ -521,6 +521,9 @@ async function startNewChat() {
         </svg>
     {:else}
     <img src="/icons/process.png" alt="Process Files" class="w-6 h-6 ">
+    <span class="tooltip-text bg-gray-700 text-white text-sm rounded py-1 px-2 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 transition-opacity duration-300">
+        Process Files
+      </span>
     {/if}
       </button>
       </div>
@@ -658,7 +661,7 @@ async function startNewChat() {
                       </button>
                   {/each}
               {:else}
-                  <p>No chat history available.</p>
+                  <p class="flex justify-center items-center h-screen text-center">No chat history available.</p>
               {/if}
           </div>
       <!-- {/if} -->
@@ -720,8 +723,13 @@ async function startNewChat() {
 
 .process-button{
     border-radius: 50px;
+    position: relative;
 }
 
+.process-button:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
 
 .prev-chat-button {
     background-color: #7190cc; 

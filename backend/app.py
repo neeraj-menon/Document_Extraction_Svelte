@@ -98,11 +98,15 @@ def callback():
     
         # Determine next chat_id
         existing_chats = list(user_data[email_id_forjson].keys())
-        next_chat_number = existing_chats[-1]
-        next_chat_number = int(next_chat_number[-1])
-        # chat_id = f"chat_{next_chat_number}"
-        # next_chat_number = len(existing_chats)
-        active_chat = f"chat_{next_chat_number}"
+        if existing_chats:
+            next_chat_number = existing_chats[-1]
+            next_chat_number = int(next_chat_number[-1])
+            # chat_id = f"chat_{next_chat_number}"
+            # next_chat_number = len(existing_chats)
+            active_chat = f"chat_{next_chat_number}"
+        else:
+            active_chat = "chat_0"
+            user_data[email_id_forjson][active_chat] = {}
         print(active_chat)
 
     
@@ -122,7 +126,22 @@ def user_profile():
 @app.route('/logout')
 def logout():
     session.clear()
+    delete_folder_contents('./uploads')
+    delete_folder_contents('./DocEx_frontend/backend/temp')
+    
+    
     return redirect(f'https://dev-v321duxg30j1tevd.us.auth0.com/v2/logout?client_id=qLihQMXNaEl08heMIy21cTzySyvgGjgq&returnTo={url_for("home", _external=True)}')
+
+def delete_folder_contents(folder_path):
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.remove(file_path)  # Remove file or link
+            elif os.path.isdir(file_path):
+                os.rmdir(file_path)  # Remove empty directory
+        except Exception as e:
+            print(f'Failed to delete {file_path}. Reason: {e}')
 
 
 def setup_user_data_file():
@@ -195,7 +214,7 @@ def update_user_data(email, chat_id, prompt, response, extracted_data, descripti
         user_data[email][chat_id] = {
             "prompts": [],
             "extracted_data": {},
-            "description": ""
+            "description": "No chat"
         }
     
     # Append the prompt-response pair to the list of prompts
@@ -397,11 +416,14 @@ def process_pdf():
     # Determine next chat_id
     # existing_chats = user_data[email].keys()
     # next_chat_number = len(existing_chats)
-    
     existing_chats = list(user_data[email].keys())
-    next_chat_number = existing_chats[-1]
-    next_chat_number = int(next_chat_number[-1])
-    chat_id = f"chat_{next_chat_number}"
+    
+    if len(existing_chats) > 1:
+        next_chat_number = existing_chats[-1]
+        next_chat_number = int(next_chat_number[-1])
+        chat_id = f"chat_{next_chat_number}"
+    else:
+        chat_id = "chat_0"
     
     session['active_chat_id'] = chat_id
     active_chat = session['active_chat_id']
@@ -410,7 +432,7 @@ def process_pdf():
 
     # Update user data
     # update_user_data(email, chat_id, system_prompt, json_data, extracted_text)
-    update_user_data(email, chat_id, "", "", extracted_text, "")
+    update_user_data(email, chat_id, "", "", extracted_text, "No chat")
     
     # Check if the folder exists
     folder_path = './DocEx_frontend/backend/extracted_images'
@@ -471,6 +493,7 @@ def download_results():
 
 @app.route('/chat', methods=['POST'])
 def chat():
+    global active_chat
     data = request.json
     user_message = data.get('message')
     if not user_message:
@@ -510,18 +533,27 @@ def chat():
         # chat_id = f"chat_{next_chat_number}"
         
         existing_chats = list(user_data[email].keys())
-        next_chat_number = existing_chats[-1]
-        next_chat_number = int(next_chat_number[-1])
-        chat_id = f"chat_{next_chat_number}"
+        # next_chat_number = existing_chats[-1]
+        # next_chat_number = int(next_chat_number[-1])
+        # chat_id = f"chat_{next_chat_number}"
         
+        if len(existing_chats) > 1:
+            next_chat_number = existing_chats[-1]
+            next_chat_number = int(next_chat_number[-1])
+            chat_id = f"chat_{next_chat_number}"
+        else:
+            chat_id = "chat_0"
+        
+        print(chat_id)
         
         session['active_chat_id'] = chat_id  # Set it in session
-        # active_chat = chat_id
+        active_chat = session['active_chat_id']
 
     if chat_id not in user_data[email]:
         user_data[email][chat_id] = {
             "prompts": [],
-            "extracted_data": {}
+            "extracted_data": {},
+            "description": "No chat"
         }
 
     conversation_history = []
@@ -540,7 +572,7 @@ def chat():
     # Set the system prompt
     system_prompt = {
         "role": "system",
-        "content": f"You are a helpful medical assistant who answers questions based on this provided data: {str(user_data[email][chat_id]["extracted_data"])}."
+        "content": f"You are a professional medical report analyst. You act as an assistant who answers questions based on this provided data: {str(user_data[email][chat_id]["extracted_data"])}."
     }
     
     # Append user message to the conversation history
@@ -565,8 +597,12 @@ def chat():
     
     # Update the description with the AI-generated summary
     # user_data[email][chat_id]["description"] = summary
-    if not user_data[email][chat_id]["description"]:
-        summary = generate_summary_with_ai(user_data[email][chat_id]["prompts"])
+    if user_data[email][chat_id]["description"] == "No chat":
+        # if len(user_data[email][chat_id]["prompts"]) > 1:
+        #     summary = generate_summary_with_ai(user_data[email][chat_id]["prompts"])
+        # else:
+        prompts = [{'prompt': user_message, 'response': assistant_reply}]
+        summary = generate_summary_with_ai(prompts)
         
     else:
         summary = user_data[email][chat_id]["description"]
@@ -584,13 +620,14 @@ def generate_summary_with_ai(prompts):
     # Prepare the messages for the AI model
     
     client = Groq(api_key="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")
+    print(prompts)
     
     conversation_history = ' '.join([p['response'] for p in prompts])
-    
+    print(conversation_history)
     summary_response = client.chat.completions.create(
         model="llama3-8b-8192",
         messages=[
-            {"role": "system", "content": "Summarize the conversation in three words. Your response must only be the three words and nothing else"},
+            {"role": "system", "content": "Summarize the given text in one to three words. Your response must only be the one to three words and nothing else. Make use of some words from the given text"},
             {"role": "user", "content": conversation_history}
         ],
         max_tokens=10,  # Adjust as needed
@@ -741,12 +778,12 @@ def new_chat():
     email = email_id_forjson
     existing_chats = list(user_data[email].keys())
     print(existing_chats)
-    prev_chat_number = len(existing_chats) 
+    # prev_chat_number = len(existing_chats)
     # next_chat_number = len(existing_chats) + 1
     next_chat_number = existing_chats[-1]
     next_chat_number = int(next_chat_number[-1]) + 1
     print(next_chat_number)
-    prev_chat_id = f"chat_{prev_chat_number}" 
+    # prev_chat_id = f"chat_{prev_chat_number}" 
     next_chat_id = f"chat_{next_chat_number}" 
     # print(chat_id)
     
