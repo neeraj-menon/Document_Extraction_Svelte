@@ -95,10 +95,64 @@
                 {
                     "prompt": "what is ca 19.9",
                     "response": "According to the test results provided, CA 19.9 is a bio-marker with a result of 2 U/mL. The units are U/mL, and the reference range is \"Less than 37\". There is no note provided for this bio-marker.\n\nCA 19.9 is a tumor marker that is often used to detect and monitor patients with pancreatic cancer. Elevated levels of CA 19.9 in the blood may indicate the presence of liver metastases or chronic pancreatitis. However, CA 19.9 can also be elevated in other conditions, such as chronic viral hepatitis and some types of inflammatory bowel disease, so a diagnosis based solely on a high CA 19.9 level is not usually possible without additional testing and clinical evaluation."
+                },
+                {
+                    "prompt": "who is God?",
+                    "response": "I think there may have been a misunderstanding! As a helpful assistant, I'm here to provide information on the test results data provided to me. However, I'm not God. The test results data doesn't discuss theological or spiritual topics like the concept of God.\n\nIf you have any questions about the test results data, feel free to ask!"
                 }
             ],
             "extracted_data": "{\n\"test_results\": [\n    {\n    \"bio_marker\": \"CA 15-3 Cancer Antigen\",\n    \"result\": 12.6,\n    \"units\": \"U/mL\",\n    \"reference_range\": \"Less than 31.3\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"CA 19.9\",\n    \"result\": 2,\n    \"units\": \"U/mL\",\n    \"reference_range\": \"Less than 37\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"CA-125\",\n    \"result\": 0.2,\n    \"units\": \"U/mL\",\n    \"reference_range\": \"Less than 35\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"CARCINO EMBRYONIC ANTIGEN (CEA)\",\n    \"result\": 1.5,\n    \"units\": \"ng/mL\",\n    \"reference_range\": \"Less than 5\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"ALPHA FETO PROTEIN (AFP)\",\n    \"result\": 2.54,\n    \"units\": \"U/mL\",\n    \"reference_range\": \"0.5-5.5\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"P GAMMA GLUTAMYL TRANSFERASE (GGT)\",\n    \"result\": 36.6,\n    \"units\": \"U/L\",\n    \"reference_range\": \"Less than 38\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"ALKALINE PHOSPHATASE\",\n    \"result\": 120.5,\n    \"units\": \"U/L\",\n    \"reference_range\": \"45-129\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"BILIRUBIN - TOTAL\",\n    \"result\": 0.31,\n    \"units\": \"mg/dL\",\n    \"reference_range\": \"0.3-1.2\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"BILIRUBIN - DIRECT\",\n    \"result\": 0.1,\n    \"units\": \"mg/dL\",\n    \"reference_range\": \"Less than 0.4\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"ASPARTATE AMINOTRANSFERASE (SGOT)\",\n    \"result\": 25.4,\n    \"units\": \"U/L\",\n    \"reference_range\": \"Less than 31\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"ALANINE TRANSAMINASE (SGPT)\",\n    \"result\": 31.9,\n    \"units\": \"U/L\",\n    \"reference_range\": \"Less than 34\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"ALBUMIN - SERUM\",\n    \"result\": 4.27,\n    \"units\": \"g/dL\",\n    \"reference_range\": \"3.2-4.8\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"PROTEIN - TOTAL\",\n    \"result\": 7.66,\n    \"units\": \"g/dL\",\n    \"reference_range\": \"5.7-8.2\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"BILIRUBIN (INDIRECT)\",\n    \"result\": 0.21,\n    \"units\": \"mg/dL\",\n    \"reference_range\": \"0-0.9\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"SERUM ALB/GLOBULIN RATIO\",\n    \"result\": 1.26,\n    \"units\": \"Ratio\",\n    \"reference_range\": \"0.9-2\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"TOTAL IRON BINDING CAPACITY (TIBC)\",\n    \"result\": 362,\n    \"units\": \"μd\",\n    \"reference_range\": \"215-535\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"IRON\",\n    \"result\": 50,\n    \"units\": \"μg/dL\",\n    \"reference_range\": \"50-170\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"TRANSFERRIN SATURATION\",\n    \"result\": 6.77,\n    \"units\": \"%\",\n    \"reference_range\": \"13-45\",\n    \"note\": \"\"\n    },\n    {\n    \"bio_marker\": \"THYROID STIMULATING HORMONE (TSH)\",\n    \"result\": 3.14,\n    \"units\": \"μIU/mL\",\n    \"reference_range\": \"0.35-4.94\",\n    \"note\": \"\"\n    }\n]\n}",
             "description": "CA 19.9 result"
+        },
+        "chat_6": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "what is stomata?",
+                    "response": "You're asking about plant biology! According to my data, stomata ([singular: stoma]) are small openings on the surface of plant leaves, stems, and some flowers that play a crucial role in gas exchange. They are typically found on the underside of leaves and are the primary sites for photosynthesis and transpiration in plants.\n\nHere's what stomata do:\n\n* Allow carbon dioxide (CO2) to enter the plant through the process of photosynthesis, essential for producing glucose and organic compounds.\n* Allow oxygen (O2) to exit the plant as a byproduct of photosynthesis.\n* Regulate water loss by controlling transpiration, avoiding excessive water loss through evaporation.\n\nStomata are typically guarded by layers of cell walls or subsidiary cells, which help to prevent excessive water loss by controlling the opening and closing of the stomatal pore. The regulation of stomatal aperture is controlled by various hormones, neurotransmitters, and environmental factors, such as light intensity, CO2 concentrations, and water availability.\n\nI hope that helps you understand stomata better!"
+                },
+                {
+                    "prompt": "what is the ideal co2 concentration?",
+                    "response": "According to various scientific studies and recommendations, the ideal CO2 concentration for human indoor spaces is between 400-600 parts per million (ppm). Here are some specific guidelines from organizations and experts in the field:\n\n* The World Health Organization (WHO) recommends an average CO2 concentration of 550-600 ppm for well-ventilated indoor spaces.\n* The U.S. Department of Energy recommends a CO2 target concentration of 450-500 ppm for energy-efficient buildings.\n* The American Society of Heating, Refrigerating and Air-Conditional Engineers (ASHRAE) suggests a CO2 target concentration of 450-600 ppm for commercial and institutional facilities.\n\nAdditionally, maintaining CO2 levels within this range can help improve indoor air quality, promote occupant health and comfort, and optimize building ventilation systems.\n\nRemember, CO2 levels can fluctuate depending on various factors, such as occupancy, ventilation rates, and activity levels. Regular monitoring and adjustments can help maintain optimal indoor air quality and prevent potential health issues."
+                }
+            ],
+            "extracted_data": "{}",
+            "description": "Plant Gas Exchange"
+        },
+        "chat_7": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "who is zeus?",
+                    "response": "In Greek mythology, Zeus (Ζεύς) was the king of the gods and the god of the sky and thunder. He was the youngest child of the Titan Cronus and the Titan Rhea. He was also known as the god of law, justice, and morality.\n\nAs the supreme ruler of Mount Olympus, Zeus wielded immense power and control over the gods, mortals, and the natural world. By his wife, Hera, he fathered a number of notable offspring, including Athena, Apollo, Artemis, Dionysus, Hermes, and many other gods and goddesses.\n\nIn addition to his divine responsibilities, Zeus was also known for his frequent romantic conquests and his iconic role as a protector of mortals from the forces of chaos and destruction. His powerful lightning bolts became a symbol of his power and authority.\n\nThroughout Greek mythology, Zeus is depicted as a wise, just, and far-sighted ruler, who governed the universe with a balance and fairness that maintained order and balance."
+                }
+            ],
+            "extracted_data": "{}",
+            "description": "Greek God Zeus"
+        },
+        "chat_8": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "what is haemoglobin?",
+                    "response": "According to the provided data, Haemoglobin (HB%) is a bio_marker with a result of 83 g/L, units of g/L, reference range of 120-150, and no note."
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/L\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"(Derived)\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"%\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"250.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pL\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}",
+            "description": "Haemoglobin Result"
         }
     },
     "neeraj_menon@thirdray.ai": {}

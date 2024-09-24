@@ -754,10 +754,12 @@ def load_chat():
         
         
         # return chat_data
+        valid_prompts = [p for p in chat_data.get('prompts', []) if p['prompt'] or p['response']]
 
         return {
             'chat_id': chat_id,
-            'prompts': chat_data.get('prompts', []),
+            # 'prompts': chat_data.get('prompts', []),
+            'prompts': valid_prompts,
             'extracted_data': chat_data.get('extracted_data', '')
         }, 200
     except Exception as e:
@@ -798,7 +800,7 @@ def new_chat():
     print(active_chat)
     
     # update_user_data(email, next_chat_id, "", "", user_data[email][prev_chat_id]["extracted_data"])
-    update_user_data(email, next_chat_id, "", "", "{}", "")
+    update_user_data(email, next_chat_id, "", "", "{}", "No chat")
     
     with open(user_data_file, 'r', encoding='utf-8') as file:
         user_data = json.load(file)

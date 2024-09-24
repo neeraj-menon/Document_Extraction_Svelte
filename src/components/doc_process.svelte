@@ -562,7 +562,7 @@ async function startNewChat() {
                         </div>
                     {/each}
                 {:else}
-                    <p>No messages to display.</p>
+                    <p></p>
                 {/if}
                   {#each chatData as message}
                       <div class="chat-message {message.role}">
