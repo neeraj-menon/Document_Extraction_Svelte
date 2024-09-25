@@ -181,7 +181,7 @@
   };
 
   let headerText = "Get answers. Find inspiration. Be more productive.";
-    let subHeaderText = "Easy to use. Just ask and DocEx can help you analyze your Medical Reports.";
+    let subHeaderText = "Easy to use. Just ask and MedData can help you analyze your Medical Reports.";
     let displayedHeaderText = "";
     let displayedSubHeaderText = "";
 
@@ -327,7 +327,7 @@
 <nav class="navbar">
 <!-- Changed the div to a button element for accessibility -->
 <button class="navbar-brand" on:click={() => goto('/')} aria-label="Go to homepage">
-  DocEx
+  MedData
 </button>
 <div class="navbar-links">
   <!-- Fixed accessibility issues by adding href and role -->
@@ -352,9 +352,9 @@
 
 <!-- About section -->
 <section id="about-section" class="about-section">
-<h2>About DocEx</h2>
+<h2>About MedData</h2>
 <p>
-  DocEx is a software designed to assist healthcare professionals in analyzing and extracting valuable information from medical documents, specifically PDFs. It leverages cutting-edge Natural Language Processing (NLP) and Artificial Intelligence (AI) to streamline workflows and improve efficiency.
+  MedData is a software designed to assist healthcare professionals in analyzing and extracting valuable information from medical report PDFs. It leverages cutting-edge Natural Language Processing (NLP) and Artificial Intelligence (AI) to streamline workflows and improve efficiency.
 </p>
 </section>
 

@@ -520,10 +520,11 @@ async function startNewChat() {
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
         </svg>
     {:else}
-    <img src="/icons/process.png" alt="Process Files" class="w-6 h-6 ">
+    <!-- <img src="/icons/process.png" alt="Process Files" class="w-6 h-6 ">
     <span class="tooltip-text bg-gray-700 text-white text-sm rounded py-1 px-2 absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 transition-opacity duration-300">
         Process Files
-      </span>
+      </span> -->
+      Process Files
     {/if}
       </button>
       </div>
@@ -685,7 +686,7 @@ async function startNewChat() {
   top: 0;
   width: 100%;
   height: 60px; /* Adjust this height according to your navbar */
-  background: linear-gradient(135deg, #a6b3db 0%, #f6f6f8 100%);
+  background-color: #212122;
   color: rgb(27, 27, 27);
   z-index: 1000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -695,6 +696,7 @@ async function startNewChat() {
     margin-left: 50px;
     margin-top: 10px;
     font-size: 13px;
+    color: white;
 }
 
 
@@ -724,15 +726,22 @@ async function startNewChat() {
 .process-button{
     border-radius: 50px;
     position: relative;
+    background: linear-gradient(135deg, #1d4ed8 0%, #6278c0 100%);
 }
 
-.process-button:hover .tooltip-text {
+.process-button:hover {
     visibility: visible;
     opacity: 1;
+    background: linear-gradient(135deg, #11328b 0%, #6278c0 100%);
 }
 
+/* .process-button:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+} */
+
 .prev-chat-button {
-    background-color: #7190cc; 
+    background-color: #212122; 
     /* background: linear-gradient(135deg, #919dbe 0%, #f6f6f8 100%); */
     color: white;
     padding: 0.5rem 1rem; 
@@ -758,9 +767,9 @@ async function startNewChat() {
   }
 
   .logout-button {
-      background-color: #f44336; /* Red color */
+      background-color: #212122; /* Red color */
       color: white;
-      border: none;
+      border: 1px solid white;
       padding: 10px 20px;
       font-size: 1em;
       cursor: pointer;
@@ -772,7 +781,7 @@ async function startNewChat() {
   }
 
   .logout-button:hover {
-      background-color: #d32f2f; /* Darker red */
+      background-color: #b3acac; /* Darker red */
   }
 
   .progress-bar {
@@ -892,7 +901,8 @@ async function startNewChat() {
   }
 
   .send-msg-btn{
-    background-color: #2563eb; 
+    /* background-color: #2563eb;  */
+    background: linear-gradient(135deg, #1d4ed8 0%, #6278c0 100%);
       color: white;
       border: none;
       /* padding: 20px 20px; */
@@ -906,7 +916,8 @@ async function startNewChat() {
   }
 
   .send-msg-btn:hover {
-    background-color: #1b51c5; /* Darker blue on hover */
+    /* background-color: #1b51c5; Darker blue on hover */
+    background: linear-gradient(135deg, #11328b 0%, #6278c0 100%);
 }
 
 .send-msg-btn svg {
@@ -921,7 +932,8 @@ async function startNewChat() {
   .new-chat-btn {
       /* background-color: red;
       color: white; */
-      background-color: #f44336; /* Red color */
+      /* border: 1px solid black; */
+      background-color: #b3acac; /* Red color */
       color: white;
       border: none;
       padding: 10px 20px;
@@ -933,6 +945,10 @@ async function startNewChat() {
       margin-left: 10px;
       margin-right: 10px;
       width: 90%;
+  }
+
+  .new-chat-btn:hover {
+      background-color: #212122; /* Darker red */
   }
 
 
@@ -985,6 +1001,7 @@ async function startNewChat() {
     border: none;
     position: relative;
     /* padding: 20px 20px; */
+    background: linear-gradient(135deg, #059669 0%, #33c49b 100%);
     width: 70px;
     font-size: 1em;
     cursor: pointer;
@@ -1048,7 +1065,8 @@ async function startNewChat() {
 
 /* Add hover effect */
 .chat-item:hover {
-  background-color: #e0e0e0;
+  background-color: #b3acac;
+  color: white;
 }
 
 /* Optional: Customize the scrollbar (webkit browsers only) */
