@@ -100,7 +100,7 @@ def callback():
         existing_chats = list(user_data[email_id_forjson].keys())
         if existing_chats:
             next_chat_number = existing_chats[-1]
-            next_chat_number = int(next_chat_number[-1])
+            next_chat_number = int(next_chat_number[5:])
             # chat_id = f"chat_{next_chat_number}"
             # next_chat_number = len(existing_chats)
             active_chat = f"chat_{next_chat_number}"
@@ -417,18 +417,21 @@ def process_pdf():
     # existing_chats = user_data[email].keys()
     # next_chat_number = len(existing_chats)
     existing_chats = list(user_data[email].keys())
+    print(existing_chats)
     
     if len(existing_chats) > 1:
         next_chat_number = existing_chats[-1]
-        next_chat_number = int(next_chat_number[-1])
+        next_chat_number = int(next_chat_number[5:])
         chat_id = f"chat_{next_chat_number}"
     else:
         chat_id = "chat_0"
     
     session['active_chat_id'] = chat_id
     active_chat = session['active_chat_id']
+    print(active_chat)
     
     active_chat = chat_id
+    print(active_chat)
 
     # Update user data
     # update_user_data(email, chat_id, system_prompt, json_data, extracted_text)
@@ -471,7 +474,7 @@ def download_results():
     
     existing_chats = list(user_data[email].keys())
     next_chat_number = existing_chats[-1]
-    next_chat_number = int(next_chat_number[-1])
+    next_chat_number = int(next_chat_number[5:])
     chat_id = f"chat_{next_chat_number}"
     
     
@@ -539,7 +542,7 @@ def chat():
         
         if len(existing_chats) > 1:
             next_chat_number = existing_chats[-1]
-            next_chat_number = int(next_chat_number[-1])
+            next_chat_number = int(next_chat_number[5:])
             chat_id = f"chat_{next_chat_number}"
         else:
             chat_id = "chat_0"
@@ -786,7 +789,7 @@ def new_chat():
     # prev_chat_number = len(existing_chats)
     # next_chat_number = len(existing_chats) + 1
     next_chat_number = existing_chats[-1]
-    next_chat_number = int(next_chat_number[-1]) + 1
+    next_chat_number = int(next_chat_number[5:]) + 1
     print(next_chat_number)
     # prev_chat_id = f"chat_{prev_chat_number}" 
     next_chat_id = f"chat_{next_chat_number}" 
