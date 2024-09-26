@@ -118,16 +118,50 @@
       }
   };
 
-  const getProgress = () => {
-      const eventSource = new EventSource('http://localhost:5000/progress');
-      eventSource.onmessage = function(event) {
-          progressPercentage = parseInt(event.data);
-          if (progressPercentage === 100) {
-              processingStatus = 'Processing completed!';
-              eventSource.close();  // Close the connection when complete
-          }
-      };
-  };
+//   const getProgress = () => {
+//       const eventSource = new EventSource('http://localhost:5000/progress');
+//       eventSource.onmessage = function(event) {
+//           progressPercentage = parseInt(event.data);
+//           if (progressPercentage === 100) {
+//               processingStatus = 'Processing completed!';
+//               eventSource.close();  // Close the connection when complete
+//           }
+//       };
+
+//   };
+
+
+
+
+const getProgress = () => {
+    const eventSource = new EventSource('http://localhost:5000/progress');
+
+    // Listen for the 'message' event sent by the server
+    eventSource.onmessage = (event) => {
+        // The event data will be a string like "data: 60, Processing files..."
+        const data = event.data.split(", ");
+        const percentage = parseInt(data[0], 10);
+        const status = data[1];
+
+        // Update the progress in the frontend
+        progressPercentage = percentage;
+        processingStatus = status;
+
+        console.log(`Progress: ${progressPercentage}, Status: ${processingStatus}`);
+
+        // Close the connection if progress reaches 100
+        if (progressPercentage >= 100) {
+            eventSource.close();
+        }
+    };
+
+    // Handle errors from the event stream
+    eventSource.onerror = (error) => {
+        console.error('Error in progress stream:', error);
+        eventSource.close();
+    };
+};
+
 
   // Function to process the files and send the form data
   const processFiles = async () => {
@@ -159,10 +193,12 @@
               method: 'POST',
               body: formDataPDF,
           });
+        //   progressPercentage = 10;
           const pdfResult = await pdfResponse.json();
           if (pdfResponse.status !== 200) {
               throw new Error(pdfResult.error || 'Error uploading PDF');
           }
+        //   progressPercentage = 20;
 
           processingStatus = 'Uploading Prompt...';
           // Upload Prompt file
@@ -170,12 +206,19 @@
               method: 'POST',
               body: formDataPrompt,
           });
+          progressPercentage = 30;
           const promptResult = await promptResponse.json();
           if (promptResponse.status !== 200) {
               throw new Error(promptResult.error || 'Error uploading Prompt');
           }
+        //   progressPercentage = 40;
 
           processingStatus = 'Processing files...';
+
+        //   getProgress();
+          console.log("Progress: ", progressPercentage)
+        //   progressPercentage = 60;
+
           // Process the files
           const processResponse = await fetch('http://localhost:5000/process_pdf', {
               method: 'POST',
@@ -186,11 +229,14 @@
                   prompt_file: promptResult.prompt_content,
               }),
           });
+        //   progressPercentage = 80;
+          console.log("Progress: ", progressPercentage)
 
           const processData = await processResponse.json();
           if (processResponse.status !== 200) {
               throw new Error(processData.error || 'Error processing files');
           }
+          console.log("Progress: ", progressPercentage)
 
           jsonResponse = JSON.stringify(processData, null, 4);
           processingStatus = 'Processing completed!';

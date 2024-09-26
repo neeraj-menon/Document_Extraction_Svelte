@@ -7,6 +7,7 @@ import os
 from groq import Groq
 from pdf_2_image import PDFConvert
 from image_2_text import ImageConvert
+from progress import update_progress
 import json
 import re
 
@@ -37,11 +38,17 @@ def process_text(pdf_path, system_prompt):
     convert_image = ImageConvert()
     
     # Convert PDF to images and save them in a designated folder
+    update_progress(30, 'Extracting Images...')
     image_folder = './DocEx_frontend/backend/extracted_images'
     image_paths = convert_pdf.convert_pdf_to_images(pdf_path, output_folder=image_folder)
-
+    
+    
     # Extract text from the generated images
+    update_progress(40, 'Extracting Text...')
     extracted_text = convert_image.extract_text_from_images(image_paths)
+    
+    
+    update_progress(50, 'Processing Text...')
 
     # Prepare to store processed results
     processed_results = ""
@@ -68,6 +75,7 @@ def process_text(pdf_path, system_prompt):
 
         # Find all matches using regex
         matches = re.findall(pattern, result, re.DOTALL)
+        json_content = ""
 
         # Extracted content between triple backticks
         if matches:
@@ -77,6 +85,8 @@ def process_text(pdf_path, system_prompt):
             print("No content found between triple backticks.")
             
         processed_results += json_content
+        
+    update_progress(80, 'Finalizing...')
 
     # Ensure the JSON is balanced by appending '}' if necessary
     if processed_results.count('{') > processed_results.count('}'):

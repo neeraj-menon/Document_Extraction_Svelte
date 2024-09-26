@@ -177,6 +177,10 @@
                 {
                     "prompt": "can you summarize this in 10 words?",
                     "response": "Stomata controls gas exchange, regulates water loss in plants."
+                },
+                {
+                    "prompt": "what is stomata?",
+                    "response": "According to your data, stomata (singular: stoma) are small openings on the surface of plant leaves, stems, and some flowers that play a crucial role in gas exchange."
                 }
             ],
             "extracted_data": "{}",
@@ -195,6 +199,10 @@
                 {
                     "prompt": "give me a shorter response",
                     "response": "Here's a summary of Zeus' character in Greek mythology:\n\nZeus was the king of the gods, god of the sky, and ruler of Mount Olympus. He was known for his power, authority, and control over the gods and mortals. He was a wise, just, and far-sighted ruler who maintained order and balance in the universe. Zeus was also famous for his romantic conquests and his iconic lightning bolts, which symbolized his power."
+                },
+                {
+                    "prompt": "where is mount olympus?",
+                    "response": "According to Greek mythology, Mount Olympus is not a physical location on Earth, but rather a mythical and divine realm that is the dwelling place of the gods, including Zeus. It is often described as the highest mountain in Greece, but its exact location is not specified.\n\nHowever, in modern times, Mount Olympus is actually a real mountain in Greece, located on the border between the regions of Thessaly and Macedonia. It is the highest peak in the country, standing at an elevation of 2,917 meters (9,570 feet) above sea level. Despite being a natural mountain, Mount Olympus is still considered a sacred site in Greece and is often associated with the mythical Mount Olympus of Greek mythology."
                 }
             ],
             "extracted_data": "{}",
@@ -253,6 +261,42 @@
             ],
             "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/dL\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"Derived\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"g/dL\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"Calculated\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"250.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pl\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}",
             "description": "Haemoglobin Concentration"
+        },
+        "chat_11": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "what is tlc?",
+                    "response": "Based on the data provided, TLC stands for \"Total Leukocyte Count\". In the context of medical reports, TLC is a common abbreviation for the total number of white blood cells (leukocytes) present in a patient's blood."
+                },
+                {
+                    "prompt": "what is a leukocyte?",
+                    "response": "As a medical report analyst, I'd be happy to help you understand what a leukocyte is.\n\nLeukocytes, also known as white blood cells, are a type of cell in the immune system that fights infection and disease. They are produced in the bone marrow and are carried in the blood to protect the body against infection, inflammation, and other foreign substances.\n\nLeukocytes are produced in large numbers in response to infections, and they migrate to the site of an infection to combat bacteria, viruses, and other foreign substances. There are several types of leukocytes, including:\n\n1. Neutrophils: These are the most common type of leukocyte and are responsible for fighting bacterial infections.\n2. Lymphocytes: These cells are responsible for fighting viral infections, and there are two main types: B cells and T cells.\n3. Monocytes: These cells mature into macrophages, which engulf and digest foreign particles and bacteria.\n4. Eosinophils: These cells play a role in fighting parasitic infections and allergic reactions.\n5. Basophils: These cells are involved in allergic reactions and are activated in response to tissue injury.\n\nIn medical reports, the total leukocyte count (TLC) refers to the total number of white blood cells in a patient's blood, which is an important indicator of their overall immune system function and response to infection or inflammation."
+                }
+            ],
+            "extracted_data": "{\n  \"test_results\": [\n    {\n      \"bio_marker\": \"HAEMOGLOBIN (HB%)\",\n      \"result\": 83,\n      \"units\": \"g/L\",\n      \"reference_range\": \"120-150\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"RED BLOOD CELL COUNT\",\n      \"result\": 3.99,\n      \"units\": \"million/pL\",\n      \"reference_range\": \"3.84-8\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PCV (PACKED CELL VOLUME)\",\n      \"result\": 26.7,\n      \"units\": \"L\",\n      \"reference_range\": \"36.0-46.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"HEMATOCRIT\",\n      \"result\": null,\n      \"units\": \"\",\n      \"reference_range\": \"\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCV (MEAN CORPUSCULAR VOLUME)\",\n      \"result\": 66.8,\n      \"units\": \"L\",\n      \"reference_range\": \"83.0-101.0\",\n      \"note\": \"(Denveu)\"\n    },\n    {\n      \"bio_marker\": \"MCH (MEAN CORPUSCULAR HAEMOGLOBIN)\",\n      \"result\": 20.8,\n      \"units\": \"pg\",\n      \"reference_range\": \"27.0-32.0\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"MCHC (MEAN CORPUSCULAR HAEMOGLOBIN CONCENTRATION)\",\n      \"result\": 31.5,\n      \"units\": \"gfL\",\n      \"reference_range\": \"31.5-34.5\",\n      \"note\": \"(Calculated)\"\n    },\n    {\n      \"bio_marker\": \"RED CELL DISTRIBUTION WIDTH\",\n      \"result\": 18.7,\n      \"units\": \"%\",\n      \"reference_range\": \"11.6-14.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"PLATELET COUNT\",\n      \"result\": 284,\n      \"units\": \"Thous/uL\",\n      \"reference_range\": \"250.0-450.0\",\n      \"note\": \"\"\n    },\n    {\n      \"bio_marker\": \"TOTAL LEUKOCYTE COUNT (TLC)\",\n      \"result\": 5.7,\n      \"units\": \"Thous/pl\",\n      \"reference_range\": \"4.0-10.0\",\n      \"note\": \"\"\n    }\n  ]\n}",
+            "description": "White Blood Count"
+        },
+        "chat_12": {
+            "prompts": [
+                {
+                    "prompt": "",
+                    "response": ""
+                },
+                {
+                    "prompt": "what is a car?",
+                    "response": "I'm happy to help! However, as a medical report analyst, I don't have information related to cars in my database. My expertise lies in analyzing medical reports and data. If you have any questions regarding medical data or reports, I'll be more than happy to assist you. Otherwise, you may want to consider asking a different expert, such as an automotive technician or a mechanic, who can provide you with comprehensive information about cars."
+                }
+            ],
+            "extracted_data": "{}",
+            "description": "Medical Report"
         }
     },
     "neeraj_menon@thirdray.ai": {}

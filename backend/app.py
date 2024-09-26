@@ -10,6 +10,7 @@ from authlib.integrations.flask_client import OAuth
 from functools import wraps
 import secrets
 
+import threading
 import time
 import os
 from groq import Groq
@@ -28,6 +29,8 @@ from functools import wraps
 import os
 import secrets
 import redis
+from progress import progress_data
+import psutil
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(32)  # Replace with a secure secret key
@@ -141,7 +144,17 @@ def delete_folder_contents(folder_path):
             elif os.path.isdir(file_path):
                 os.rmdir(file_path)  # Remove empty directory
         except Exception as e:
-            print(f'Failed to delete {file_path}. Reason: {e}')
+            for proc in psutil.process_iter():
+                try:
+                    for file in proc.open_files():
+                        if file.path == file_path:
+                            proc.terminate()  # Kill the process using the file
+                            proc.wait()  # Wait for the process to terminate
+                            break
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                    print(f'Failed to delete {file_path}. Reason: {e}')
+            
+
 
 
 def setup_user_data_file():
@@ -214,7 +227,7 @@ def update_user_data(email, chat_id, prompt, response, extracted_data, descripti
         user_data[email][chat_id] = {
             "prompts": [],
             "extracted_data": {},
-            "description": "No chat"
+            "description": chat_id
         }
     
     # Append the prompt-response pair to the list of prompts
@@ -282,103 +295,29 @@ def upload_prompt():
         return jsonify({'message': 'Prompt uploaded', 'prompt_content': prompt_path}), 200
     return jsonify({'error': 'Invalid file type'}), 400
 
+
+# progress_data = {"percentage": 0, "status": ""}
+
+# @app.route('/progress')
+# def progress_stream():
+#     def generate():
+#         global progress
+#         while progress < 100:
+#             time.sleep(1)
+#             yield f"data:{progress}\n\n"
+#         yield "data:100\n\n"
+#     return Response(generate(), mimetype='text/event-stream')
+
+
 @app.route('/progress')
 def progress_stream():
     def generate():
-        global progress
-        while progress < 100:
+        while progress_data["percentage"] < 100:
+            # Simulate waiting for real progress
             time.sleep(1)
-            yield f"data:{progress}\n\n"
-        yield "data:100\n\n"
-    return Response(generate(), mimetype='text/event-stream')
-
-
-# @app.route('/process_pdf', methods=['POST'])
-# def process_pdf():
-#     global progress
-#     pdf_file = request.json.get('pdf_file')
-#     prompt_file = request.json.get('prompt_file')
-
-#     with open(prompt_file, 'r') as file:
-#         system_prompt = file.read()
-
-#     if not pdf_file or not prompt_file:
-#         return jsonify({'error': 'No file or prompt provided'}), 400
-
-#     progress = 60  # Start processing
-#     extracted_text = process_text(pdf_file, system_prompt)
+            yield f"data: {progress_data['percentage']}, {progress_data['status']}\n\n"
     
-#     progress = 80  # Processing nearing completion
-#     json_data = json.dumps(extracted_text, ensure_ascii=False, indent=4)
-    
-#     # Update the user data file
-#     email = session.get('profile', {}).get('email')
-#     chat_id = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-#     update_user_data(email, chat_id, system_prompt, json_data, extracted_text)
-    
-#     progress = 100  # Processing complete
-#     return jsonify(extracted_text), 200
-
-
-# @app.route('/chat', methods=['POST'])
-# def chat():
-#     data = request.json
-#     user_message = data.get('message')
-#     if not user_message:
-#         return jsonify({'reply': 'No message provided'}), 400
-
-#     email = session.get('profile', {}).get('email')
-#     chat_id = data.get('session_id', datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"))
-    
-
-#     user_data_file = app.config['USER_DATA_FILE']
-#     with open(user_data_file, 'r', encoding='utf-8') as file:
-#         user_data = json.load(file)
-
-#     if email not in user_data:
-#         user_data[email] = {}
-
-#     if chat_id not in user_data[email]:
-#         user_data[email][chat_id] = {
-#             "prompts": {},
-#             "extracted_data": {}
-#         }
-
-#     conversation_history = []
-#     if user_data[email][chat_id]["prompts"]:
-#         conversation_history = [
-#             {"role": "user", "content": k}
-#             for k in user_data[email][chat_id]["prompts"].keys()
-#         ]
-#         conversation_history.append({"role": "system", "content": user_data[email][chat_id]["extracted_data"]})
-
-#     # Initialize Groq client with API key
-#     client = Groq(api_key="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")
-
-#     # Set the system prompt
-#     system_prompt = {
-#         "role": "system",
-#         "content": "You are a helpful assistant who answers questions based on the provided data."
-#     }
-    
-#     # Append user message to the conversation history
-#     conversation_history.append({"role": "user", "content": user_message})
-
-#     # Get the response from Groq
-#     response = client.chat.completions.create(
-#         model="llama3-8b-8192",
-#         messages=conversation_history,
-#         max_tokens=1024,
-#         temperature=1.2
-#     )
-
-#     assistant_reply = response.choices[0].message.content
-
-#     # Update the user's data file with the new prompt and response
-#     update_user_data(email, chat_id, user_message, assistant_reply, user_data[email][chat_id]["extracted_data"])
-
-#     return jsonify({'reply': assistant_reply}), 200
-
+    return Response(generate(), content_type='text/event-stream')
 
 
 
@@ -395,10 +334,10 @@ def process_pdf():
     if not pdf_file or not prompt_file:
         return jsonify({'error': 'No file or prompt provided'}), 400
 
-    progress = 60  # Start processing
+    # progress = 60  # Start processing
     extracted_text = process_text(pdf_file, system_prompt)
     
-    progress = 80  # Processing nearing completion
+    # progress = 80  # Processing nearing completion
     json_data = json.dumps(extracted_text, ensure_ascii=False, indent=4)
     
     # Update the user data file
@@ -435,7 +374,7 @@ def process_pdf():
 
     # Update user data
     # update_user_data(email, chat_id, system_prompt, json_data, extracted_text)
-    update_user_data(email, chat_id, "", "", extracted_text, "No chat")
+    update_user_data(email, chat_id, "", "", extracted_text, chat_id)
     
     # Check if the folder exists
     folder_path = './DocEx_frontend/backend/extracted_images'
@@ -446,8 +385,10 @@ def process_pdf():
     else:
         print(f"The folder '{folder_path}' does not exist.")
     
-    progress = 100  # Processing complete
+    # progress = 100  # Processing complete
     return extracted_text, 200
+
+
 
 
 @app.route('/download_results', methods=['GET'])
@@ -556,7 +497,7 @@ def chat():
         user_data[email][chat_id] = {
             "prompts": [],
             "extracted_data": {},
-            "description": "No chat"
+            "description": chat_id
         }
 
     conversation_history = []
@@ -603,7 +544,7 @@ def chat():
     
     # Update the description with the AI-generated summary
     # user_data[email][chat_id]["description"] = summary
-    if user_data[email][chat_id]["description"] == "No chat":
+    if user_data[email][chat_id]["description"] == chat_id:
         # if len(user_data[email][chat_id]["prompts"]) > 1:
         #     summary = generate_summary_with_ai(user_data[email][chat_id]["prompts"])
         # else:
@@ -806,7 +747,7 @@ def new_chat():
     print(active_chat)
     
     # update_user_data(email, next_chat_id, "", "", user_data[email][prev_chat_id]["extracted_data"])
-    update_user_data(email, next_chat_id, "", "", "{}", "No chat")
+    update_user_data(email, next_chat_id, "", "", "{}", active_chat)
     
     with open(user_data_file, 'r', encoding='utf-8') as file:
         user_data = json.load(file)
