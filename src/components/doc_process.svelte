@@ -33,8 +33,6 @@
   let fetchResultsHistoryError = null; // Error handling for results history
   let resultsHistory = []; // Holds the list of previous results
 
-
-
     
   onMount(async () => {
         const response = await fetch('http://localhost:5000/user_profile', {
@@ -505,7 +503,7 @@ async function startNewChat() {
                 on:click={() => document.getElementById('pdf').click()}
                 on:keydown={(e) => e.key === 'Enter' && document.getElementById('pdf').click()}
                 tabindex="0"
-                class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition ease-in-out duration-300"
+                class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-center cursor-pointer hover:border-green-500 transition ease-in-out duration-300"
             >
                 {#if pdfThumbnail}
                     <img src={pdfThumbnail} alt="PDF Thumbnail" class="mt-2 w-12 h-auto mx-auto"/>
@@ -514,7 +512,10 @@ async function startNewChat() {
                     <p class="text-gray-600 mt-1">Selected file: {pdfFilename}</p>
                 {:else}
                     <p class="text-gray-600">Drag & drop a PDF file here, or <button 
-                        class="border border-blue-500 text-blue-500 px-2 py-1 rounded-md hover:bg-blue-500 hover:text-white transition ease-in-out duration-300"
+                        class="px-2 py-1 rounded-md transition ease-in-out duration-300"
+                        style="border: 1px solid #05a773; color: #05a773;"
+                        onmouseover="this.style.backgroundColor='#05a773'; this.style.color='white';"
+                        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#05a773';"
                     >
                         browse
                     </button></p>
@@ -534,7 +535,7 @@ async function startNewChat() {
                 on:click={() => document.getElementById('prompt').click()}
                 on:keydown={(e) => e.key === 'Enter' && document.getElementById('prompt').click()}
                 tabindex="0"
-                class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-center cursor-pointer hover:border-blue-500 transition ease-in-out duration-300"
+                class="border-2 border-dashed border-gray-400 rounded-lg p-4 text-center cursor-pointer hover:border-green-500 transition ease-in-out duration-300"
             >
                 {#if promptThumbnail}
                     <img src={promptThumbnail} alt="Prompt Thumbnail" class="mt-2 w-12 h-auto mx-auto"/>
@@ -543,7 +544,10 @@ async function startNewChat() {
                     <p class="text-gray-600 mt-1">Selected file: {promptFilename}</p>
                 {:else}
                     <p class="text-gray-600">Drag & drop a text file here, or <button 
-                        class="border border-blue-500 text-blue-500 px-2 py-1 rounded-md hover:bg-blue-500 hover:text-white transition ease-in-out duration-300"
+                        class="px-2 py-1 rounded-md transition ease-in-out duration-300"
+                        style="border: 1px solid #05a773; color: #05a773;"
+                        onmouseover="this.style.backgroundColor='#05a773'; this.style.color='white';"
+                        onmouseout="this.style.backgroundColor='transparent'; this.style.color='#05a773';"
                     >
                         browse
                     </button></p>
@@ -632,10 +636,11 @@ async function startNewChat() {
                 <input
                     type="text"
                     placeholder="Ask me anything about the processed results..."
-                    class="placeholder-centered"
+                    
                     bind:value={userInput}
+                    class="{userInput ? 'has-text' : ''}"  
                 />
-                <button on:click={sendMessage} class="send-msg-btn">
+                <button on:click={sendMessage} class="send-msg-btn {userInput ? 'active' : ''}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l18-9-9 18-2-7-7-2z" />
                     </svg>
@@ -666,7 +671,7 @@ async function startNewChat() {
 
     <!-- Scrollable JSON response -->
     <div class="json-container">
-      <pre class="whitespace-pre-wrap text-gray-700">{jsonResponse}</pre>
+      <pre class="whitespace-pre-wrap text-white">{jsonResponse}</pre>
     </div>
 
     <!-- Download button for the JSON file -->
@@ -771,14 +776,20 @@ async function startNewChat() {
 
 .process-button{
     border-radius: 50px;
+    margin-top: 40px;
     position: relative;
-    background: linear-gradient(135deg, #1d4ed8 0%, #6278c0 100%);
+    /* background: linear-gradient(135deg, #1d4ed8 0%, #6278c0 100%); */
+    /* background-color: #F4F4F4; */
+    background: #059669;
+    color: white;
 }
 
 .process-button:hover {
     visibility: visible;
     opacity: 1;
-    background: linear-gradient(135deg, #11328b 0%, #6278c0 100%);
+    /* background: linear-gradient(135deg, #11328b 0%, #6278c0 100%); */
+    background: #06b87f;
+    transition: 0.3s ease-in-out
 }
 
 /* .process-button:hover .tooltip-text {
@@ -884,10 +895,10 @@ async function startNewChat() {
     flex-direction: column;
       height: 590px;
       overflow-y: auto;
-      background-color: #f8fafc;;
+      background-color: white;
       padding: 10px;
       margin-bottom: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
   }
 
 
@@ -897,8 +908,9 @@ async function startNewChat() {
     margin: 8px 0;
     padding: 12px 16px;
     border-radius: 20px;
-    background: linear-gradient(135deg, #1d4ed8 0%, #6278c0 100%); /* Blue gradient */
-    color: white;
+    /* background: linear-gradient(135deg, #1d4ed8 0%, #6278c0 100%); Blue gradient */
+    background-color: #F4F4F4; 
+    color: black;
     align-self: flex-end;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
     border-bottom-right-radius: 0;
@@ -912,10 +924,11 @@ async function startNewChat() {
     margin: 8px 0;
     padding: 12px 16px;
     border-radius: 20px;
-    background: linear-gradient(135deg, #059669 0%, #33c49b 100%); /* Green gradient */
-    color: white;
+    /* background: linear-gradient(135deg, #059669 0%, #33c49b 100%); Green gradient */
+    background-color: white;
+    color: black;
     align-self: flex-start;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); */
     border-bottom-left-radius: 0;
     font-size: 13.5px;
     /* font-weight: bold; */
@@ -925,7 +938,7 @@ async function startNewChat() {
       display: flex;
       align-items: center;
       padding: 10px;
-      border-top: 1px solid #ddd;
+      /* border-top: 0.1px solid white; */
       background: #fff;
       height: 60px; /* Set a fixed height for the input area */
   }
@@ -933,13 +946,17 @@ async function startNewChat() {
   .chat-input input {
       width: 80%;
       padding: 10px;
+      border-radius: 50px;
+      outline: #F4F4F4;
       margin-right: 10px;
       margin-top: 25px;
+      margin-bottom: 25px;
+      border-color: #ddd;
   }
 
-  .placeholder-centered {
+  .chat-input input::placeholder {
   display: block; /* Ensure the placeholder is displayed as a block element */
-  margin-bottom: 30px; /* Center the placeholder vertically */
+  margin-bottom: 50px; /* Center the placeholder vertically */
 }
 
   .chat-input button {
@@ -947,13 +964,14 @@ async function startNewChat() {
   }
 
   .send-msg-btn{
-    /* background-color: #2563eb;  */
-    background: linear-gradient(135deg, #1d4ed8 0%, #6278c0 100%);
-      color: white;
+    background-color: #F4F4F4; 
+    /* background: #059669; */
+    /* background: linear-gradient(135deg, #1d4ed8 0%, #6278c0 100%); */
+      color: black;
       border: none;
       /* padding: 20px 20px; */
       font-size: 1em;
-      cursor: pointer;
+      cursor: not-allowed;
       border-radius: 50px;
       align-items: center;
       margin-left: 90px;
@@ -961,12 +979,31 @@ async function startNewChat() {
 
   }
 
+   /* When the button is active */
+   .send-msg-btn.active {
+    background-color: #05a773;
+    cursor: pointer;
+  }
+
+   /* Active hover state */
+   .send-msg-btn.active:hover {
+    background-color: #03a06a;
+  }
+
   .send-msg-btn:hover {
     /* background-color: #1b51c5; Darker blue on hover */
-    background: linear-gradient(135deg, #11328b 0%, #6278c0 100%);
+    /* background: #05a773; */
+    transition: 0.3s ease-in-out;
 }
 
 .send-msg-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2;
+    stroke: black; /* Icon color */
+}
+
+.send-msg-btn.active svg {
     width: 16px;
     height: 16px;
     stroke-width: 2;
@@ -979,7 +1016,7 @@ async function startNewChat() {
       /* background-color: red;
       color: white; */
       /* border: 1px solid black; */
-      background-color: #b3acac; /* Red color */
+      background-color: #059669; /* Red color */
       color: white;
       border: none;
       padding: 10px 20px;
@@ -994,20 +1031,22 @@ async function startNewChat() {
   }
 
   .new-chat-btn:hover {
-      background-color: #212122; /* Darker red */
+      background-color: #05a773; /* Darker red */
+      transition: 0.3s ease-in-out;
   }
 
 
   .processed-container{
     height: 837px; /* Adjust height as needed */
+    background-color: white;
   }
 
   /* Modernized container for scrollable JSON response */
 .json-container {
     height: 697px; /* Adjust height as needed */
     overflow-y: auto;
-    background-color: #f8fafc; /* Light gray background for readability */
-    padding: 20px;
+    /* background-color: #f8fafc;  */
+    background-color: black;
     border: 1px solid #e5e7eb; /* Light border */
     border-radius: 8px; /* Smoother corner radius */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
@@ -1047,7 +1086,7 @@ async function startNewChat() {
     border: none;
     position: relative;
     /* padding: 20px 20px; */
-    background: linear-gradient(135deg, #059669 0%, #33c49b 100%);
+    background: #059669;
     width: 70px;
     font-size: 1em;
     cursor: pointer;
@@ -1066,9 +1105,17 @@ async function startNewChat() {
     transition: opacity 0.3s ease;
 }
 
+.download_json:hover {
+    visibility: visible;
+    opacity: 1;
+    background: #06b87f;
+    transition: 0.3s ease-in-out
+}
+
 .download_json:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
+    width: 127px;
 }
 
   /* Sidebar styles */
@@ -1111,8 +1158,8 @@ async function startNewChat() {
 
 /* Add hover effect */
 .chat-item:hover {
-  background-color: #b3acac;
-  color: white;
+  background-color: #F4F4F4;
+  color: black;
 }
 
 /* Optional: Customize the scrollbar (webkit browsers only) */
